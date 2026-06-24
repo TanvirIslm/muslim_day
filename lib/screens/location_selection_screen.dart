@@ -15,6 +15,12 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<District> _filteredDistricts = [];
   List<District> _allDistricts = [];
+  
+  // State Management Variables
+  bool _isGpsMode = false;
+  District? _selectedDistrict; 
+  
+  final Color primaryThemeColor = const Color(0xFF1D9375); 
 
   @override
   void initState() {
@@ -23,7 +29,6 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
   }
 
   void _loadDistricts() {
-    // Load all districts
     _allDistricts = [
       // Dhaka Division
       District(name: "ঢাকা", latitude: 23.8103, longitude: 90.4125),
@@ -139,19 +144,20 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: const Color(0xFF1D9375),
+        backgroundColor: primaryThemeColor,
         foregroundColor: Colors.white,
+        elevation: 0, 
       ),
       body: Column(
         children: [
           Container(
-            color: const Color(0xFF1D9375),
-            padding: const EdgeInsets.all(16.0),
+            color: primaryThemeColor,
+            padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'সালাত ও সাহরি-ইফতারের সময় সঠিক ভাবে হিসার করার জন্য আপনার লোকেশন সেট করুন।',
+                  'সালাত ও সাহরি-ইফতারের সময় সঠিক ভাবে হিসাব করার জন্য আপনার লোকেশন সেট করুন।',
                   style: GoogleFonts.notoSansBengali(
                     color: Colors.white,
                     fontSize: 14,
@@ -177,7 +183,7 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
                     children: [
                       Expanded(
                         child: Text(
-                          'Bangladesh',
+                          'বাংলাদেশ', // Localized to match the app theme
                           style: GoogleFonts.notoSansBengali(fontSize: 16),
                         ),
                       ),
@@ -186,8 +192,10 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
                   ),
                 ),
                 const SizedBox(height: 12),
+                
+                // FIXED: Dynamically displays your actual saved location
                 Text(
-                  'Default City: Dhaka',
+                  'বর্তমান লোকেশন: ${prayerSettings.locationName}',
                   style: GoogleFonts.notoSansBengali(
                     color: Colors.white70,
                     fontSize: 12,
@@ -210,127 +218,198 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
                 ),
                 const SizedBox(height: 16),
                 
-                // Manual Selection Option
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.green.shade300, width: 2),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Radio<bool>(
-                            value: true,
-                            groupValue: true,
-                            onChanged: (value) {},
-                            activeColor: Colors.green,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'জেলা ভিত্তিক (ইসলামিক ফাউন্ডেশন)',
-                              style: GoogleFonts.notoSansBengali(
-                                fontWeight: FontWeight.bold,
+                // Manual Selection Interactive Card
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isGpsMode = false;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: !_isGpsMode ? Colors.green.shade50 : Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: !_isGpsMode ? primaryThemeColor : Colors.grey.shade300, 
+                        width: !_isGpsMode ? 2 : 1,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Radio<bool>(
+                              value: false,
+                              groupValue: _isGpsMode,
+                              onChanged: (value) {
+                                setState(() {
+                                  _isGpsMode = value!;
+                                });
+                              },
+                              activeColor: primaryThemeColor,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'জেলা ভিত্তিক (ইসলামিক ফাউন্ডেশন)',
+                                style: GoogleFonts.notoSansBengali(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 48.0),
-                        child: Text(
-                          'GPS পদ্ধতিতে কোনো স্থানের পুঞ্খানুপুঞ্খ সময় দেখানো হয়। সেক্ষেত্রে অন্যান্য ক্যালেন্ডারের সময়ের সাথে কিছু পার্থক্য হতে পারে। রমাদানে ইসলামিক ফাউন্ডেশনের সময় দেখতে চাইলে GPS\'র পরিবর্তে, জেলা সিলেক্ট করুন।',
-                          style: GoogleFonts.notoSansBengali(
-                            fontSize: 12,
-                            color: Colors.grey.shade700,
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 48.0),
+                          child: Text(
+                            'GPS পদ্ধতিতে কোনো স্থানের পুঙ্খানুপুঙ্খ সময় দেখানো হয়। সেক্ষেত্রে অন্যান্য ক্যালেন্ডারের সময়ের সাথে কিছু পার্থক্য হতে পারে। রমাদানে ইসলামিক ফাউন্ডেশনের সময় দেখতে চাইলে GPS\'র পরিবর্তে, জেলা সিলেক্ট করুন।',
+                            style: GoogleFonts.notoSansBengali(
+                              fontSize: 12,
+                              color: Colors.grey.shade700,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),
                 
-                // GPS Option
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey.shade300),
-                  ),
-                  child: Row(
-                    children: [
-                      Radio<bool>(
-                        value: false,
-                        groupValue: true,
-                        onChanged: (value) {
-                          prayerSettings.detectCurrentLocation();
-                          Navigator.pop(context);
-                        },
+                // GPS Option Interactive Card
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isGpsMode = true;
+                      // FIXED: No longer clearing the selected district here!
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: _isGpsMode ? Colors.green.shade50 : Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: _isGpsMode ? primaryThemeColor : Colors.grey.shade300,
+                        width: _isGpsMode ? 2 : 1,
                       ),
-                      Expanded(
-                        child: Text(
-                          'GPS লোকেশন ভিত্তিক (অস্পেক্ষাকৃত নির্ভূল)',
-                          style: GoogleFonts.notoSansBengali(),
+                    ),
+                    child: Row(
+                      children: [
+                        Radio<bool>(
+                          value: true,
+                          groupValue: _isGpsMode,
+                          onChanged: (value) {
+                            setState(() {
+                              _isGpsMode = value!;
+                            });
+                          },
+                          activeColor: primaryThemeColor,
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Text(
+                            'GPS লোকেশন ভিত্তিক (অপেক্ষাকৃত নির্ভুল)',
+                            style: GoogleFonts.notoSansBengali(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextField(
-                  controller: _searchController,
-                  onChanged: _filterDistricts,
-                  decoration: InputDecoration(
-                    hintText: 'জেলা খুঁজুন...',
-                    hintStyle: GoogleFonts.notoSansBengali(),
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                
+                // Search field
+                Opacity(
+                  opacity: _isGpsMode ? 0.5 : 1.0,
+                  // FIXED: Removed AbsorbPointer.
+                  child: TextField(
+                    controller: _searchController,
+                    onTap: () {
+                      // Smart UX: Auto-switch to manual mode when the user clicks the search bar
+                      setState(() {
+                        _isGpsMode = false; 
+                      });
+                    },
+                    onChanged: _filterDistricts,
+                    decoration: InputDecoration(
+                      hintText: 'জেলা খুঁজুন...',
+                      hintStyle: GoogleFonts.notoSansBengali(),
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           ),
+          
+          // Predetermined District List Builder
           Expanded(
-            child: ListView.builder(
-              itemCount: _filteredDistricts.length,
-              itemBuilder: (context, index) {
-                final district = _filteredDistricts[index];
-                return ListTile(
-                  title: Text(
-                    district.name,
-                    style: GoogleFonts.notoSansBengali(),
-                  ),
-                  onTap: () async {
-                    // Update location in prayer settings
-                    await prayerSettings.updateManualLocation(
-                      district.latitude,
-                      district.longitude,
-                      '${district.name}, বাংলাদেশ',
-                    );
-                    if (context.mounted) {
-                      Navigator.pop(context);
-                    }
-                  },
-                );
-              },
+            child: Opacity(
+              opacity: _isGpsMode ? 0.5 : 1.0,
+              // FIXED: Removed AbsorbPointer so it is always clickable!
+              child: ListView.builder(
+                itemCount: _filteredDistricts.length,
+                itemBuilder: (context, index) {
+                  final district = _filteredDistricts[index];
+                  // Only show the green highlight if Manual Mode is active
+                  final isSelected = !_isGpsMode && _selectedDistrict == district;
+                  
+                  return ListTile(
+                    selected: isSelected,
+                    selectedTileColor: Colors.green.shade50,
+                    title: Text(
+                      district.name,
+                      style: GoogleFonts.notoSansBengali(
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected ? primaryThemeColor : Colors.black87,
+                      ),
+                    ),
+                    trailing: isSelected 
+                        ? Icon(Icons.check_circle, color: primaryThemeColor) 
+                        : null,
+                    onTap: () {
+                      // Smart UX: Auto-switch to manual mode when a district is clicked
+                      setState(() {
+                        _isGpsMode = false; 
+                        _selectedDistrict = district;
+                      });
+                    },
+                  );
+                },
+              ),
             ),
           ),
+          
+          // Operational SAVE Button
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: (_isGpsMode || _selectedDistrict != null) 
+                    ? () async {
+                        if (_isGpsMode) {
+                          // Handle GPS Save Configuration
+                          await prayerSettings.detectCurrentLocation();
+                        } else if (_selectedDistrict != null) {
+                          // Handle Manual Predetermined Location Config
+                          await prayerSettings.updateManualLocation(
+                            _selectedDistrict!.latitude,
+                            _selectedDistrict!.longitude,
+                            '${_selectedDistrict!.name}, বাংলাদেশ',
+                          );
+                        }
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      }
+                    : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1D9375),
+                  backgroundColor: primaryThemeColor,
+                  disabledBackgroundColor: Colors.grey.shade300,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

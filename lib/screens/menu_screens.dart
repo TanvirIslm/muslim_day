@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'qibla_compass.dart';
 import 'tasbeeh.dart';
-import 'fiqh_assistant_page.dart';
+// import 'fiqh_assistant_page.dart';
 import 'dua_collection_page.dart';
 import 'nearby_mosque_page.dart';
 import 'masnoon_amal_page.dart';
@@ -99,17 +99,17 @@ class MenuScreen extends StatelessWidget {
               );
             },
           ),
-          _buildMenuItem(
-              icon: Icons.support_agent_outlined,
-              title: 'ফিকহ অ্যাসিস্ট্যান্ট', 
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FiqhAssistantPage(),
-                  ),
-                );
-              }),
+          // _buildMenuItem(
+          //     icon: Icons.support_agent_outlined,
+          //     title: 'ফিকহ অ্যাসিস্ট্যান্ট', 
+          //     onTap: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => const FiqhAssistantPage(),
+          //         ),
+          //       );
+          //     }),
 
           // Tools Section
           _buildSectionHeader('টুলস'),
@@ -197,7 +197,7 @@ class MenuScreen extends StatelessWidget {
       child: Text(
         title,
         style: GoogleFonts.notoSansBengali(
-          color: Color(0xFF1D9375),
+          color: const Color(0xFF1D9375),
           fontWeight: FontWeight.bold,
           fontSize: 14,
         ),

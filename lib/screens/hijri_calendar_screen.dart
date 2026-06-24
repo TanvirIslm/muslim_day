@@ -123,7 +123,7 @@ class _HijriCalendarScreenState extends State<HijriCalendarScreen> {
                 end: Alignment.bottomCenter,
                 colors: [
                   const Color(0xFF1D9375),
-                  const Color(0xFF1D9375).withOpacity(0.8),
+                  const Color(0xFF1D9375).withValues(alpha: 0.8),
                 ],
               ),
             ),
@@ -150,14 +150,14 @@ class _HijriCalendarScreenState extends State<HijriCalendarScreen> {
                           monthNameBengali,
                           style: GoogleFonts.notoSansBengali(
                             fontSize: 18,
-                            color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withValues(alpha: 0.9),
                           ),
                         ),
                         Text(
                           _toBengaliNumber(_selectedHijriDate.hYear),
                           style: GoogleFonts.notoSansBengali(
                             fontSize: 16,
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -241,7 +241,7 @@ class _HijriCalendarScreenState extends State<HijriCalendarScreen> {
         boxShadow: isToday
             ? [
                 BoxShadow(
-                  color: const Color(0xFF1D9375).withOpacity(0.3),
+                  color: const Color(0xFF1D9375).withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -264,7 +264,7 @@ class _HijriCalendarScreenState extends State<HijriCalendarScreen> {
             gregorianDate.day.toString(),
             style: TextStyle(
               fontSize: 10,
-              color: isToday ? Colors.white.withOpacity(0.8) : Colors.grey.shade600,
+              color: isToday ? Colors.white.withValues(alpha: 0.8) : Colors.grey.shade600,
             ),
           ),
         ],

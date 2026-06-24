@@ -23,7 +23,7 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.campaign_outlined),
           activeIcon: Icon(Icons.campaign),
-          label: 'মাহফিল',
+          label: 'কমিউনিটি',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_book_outlined),

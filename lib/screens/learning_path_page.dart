@@ -46,7 +46,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
   Widget _buildPathSelector() {
     return Container(
       padding: const EdgeInsets.all(16),
-      color: const Color(0xFF1D9375).withOpacity(0.1),
+      color: const Color(0xFF1D9375).withValues(alpha: 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -544,7 +544,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(Icons.access_time, size: 16, color: Colors.grey),
+                      const Icon(Icons.access_time, size: 16, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
                         lesson['duration'] as String,

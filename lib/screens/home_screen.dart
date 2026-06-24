@@ -19,24 +19,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  // This list is no longer 'const'
   static final List<Widget> _pages = <Widget>[
-    const HomeContent(), // Index 0: Home (keeping original for now)
-  const CommunityHubPage(), // Index 1: Community Hub
-    
-    // Index 2: Quran (as before)
+    const HomeContent(),
+    const CommunityHubPage(),
     ChangeNotifierProvider(
       create: (context) => QuranSettings(),
       child: const QuranScreen(), 
     ),
-    
-    // !! 3. Replaced "Dua Page" with "Amal Journal"
     ChangeNotifierProvider(
       create: (context) => AmalProvider(),
-      child: const AmalJournalPage(), // Index 3: Amal Journal
+      child: const AmalJournalPage(),
     ), 
     
-    const MenuScreen(), // Index 4: Menu
+    const MenuScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -85,8 +80,8 @@ class _AIFloatingButton extends StatelessWidget {
         _showAIDialog(context);
       },
       backgroundColor: const Color(0xFF1D9375),
-      child: const Icon(Icons.auto_awesome, size: 20, color: Colors.white),
       heroTag: 'ai_assistant',
+      child: const Icon(Icons.auto_awesome, size: 20, color: Colors.white),
     );
   }
 

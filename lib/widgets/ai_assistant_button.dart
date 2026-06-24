@@ -91,11 +91,11 @@ class _AIAssistantButtonState extends State<AIAssistantButton>
             // Header
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
                   colors: [Color(0xFF1D9375), Color(0xFF1A4D4D)],
                 ),
-                borderRadius: const BorderRadius.vertical(
+                borderRadius: BorderRadius.vertical(
                   top: Radius.circular(25),
                 ),
               ),
@@ -104,7 +104,7 @@ class _AIAssistantButtonState extends State<AIAssistantButton>
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Icon(
@@ -267,10 +267,10 @@ class _AIAssistantButtonState extends State<AIAssistantButton>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xFF1D9375).withOpacity(0.1),
+          color: const Color(0xFF1D9375).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: const Color(0xFF1D9375).withOpacity(0.3),
+            color: const Color(0xFF1D9375).withValues(alpha: 0.3),
           ),
         ),
         child: Text(
@@ -291,7 +291,7 @@ class _AIAssistantButtonState extends State<AIAssistantButton>
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: const Color(0xFF1D9375).withOpacity(0.1),
+            color: const Color(0xFF1D9375).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(

@@ -30,7 +30,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         title: Text(
-          'কমিউনিটি হাব',
+          'কমিউনিটি',
           style: GoogleFonts.notoSansBengali(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -227,7 +227,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 30),
@@ -284,7 +284,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -322,7 +322,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: color, size: 28),
@@ -428,7 +428,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 30),
@@ -458,7 +458,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -652,7 +652,7 @@ class _CommunityHubPageState extends State<CommunityHubPage> with SingleTickerPr
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: const Color(0xFF1D9375).withOpacity(0.1),
+                color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(

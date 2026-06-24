@@ -209,7 +209,7 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       boxShadow: [
-                        BoxShadow(color: Colors.grey.withOpacity(0.3), blurRadius: 10, spreadRadius: 2),
+                        BoxShadow(color: Colors.grey.withValues(alpha: 0.3), blurRadius: 10, spreadRadius: 2),
                       ],
                       gradient: RadialGradient(
                         colors: [Colors.white, Colors.grey.shade100],
@@ -229,22 +229,22 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                         // NSEW indicators
                         Transform.rotate(
                           angle: -deviceHeadingRadians,
-                          child: Stack(
+                          child: const Stack(
                             alignment: Alignment.center,
                             children: [
-                              const Positioned(
+                              Positioned(
                                 top: 15,
                                 child: Text("N", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
                               ),
-                              const Positioned(
+                              Positioned(
                                 bottom: 15,
                                 child: Text("S", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
                               ),
-                              const Positioned(
+                              Positioned(
                                 right: 15,
                                 child: Text("E", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
                               ),
-                              const Positioned(
+                              Positioned(
                                 left: 15,
                                 child: Text("W", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
                               ),

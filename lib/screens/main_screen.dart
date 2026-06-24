@@ -6,6 +6,8 @@ import 'package:muslim_day/screens/dua_collection_page.dart';
 import 'package:muslim_day/screens/menu_screens.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -13,11 +15,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = [
-    HomeScreen(),
-  CommunityHubPage(),
-    QuranScreen(),
-    DuaCollectionPage(),
-    MenuScreen(),
+    const HomeScreen(),
+    const CommunityHubPage(),
+    const QuranScreen(),
+    const DuaCollectionPage(),
+    const MenuScreen(),
   ];
 
   @override
@@ -32,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'হোম',

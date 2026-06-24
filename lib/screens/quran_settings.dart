@@ -116,7 +116,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 value: settings.showTranslation,
-                activeColor: Colors.teal,
+                activeThumbColor: Colors.teal,
                 onChanged: (value) {
                   settings.toggleTranslation(value);
                 },

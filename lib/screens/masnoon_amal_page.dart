@@ -103,7 +103,7 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           leading: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: (amal['color'] as Color).withOpacity(0.1),
+              color: (amal['color'] as Color).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -172,7 +172,7 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
                               height: 24,
                               margin: const EdgeInsets.only(right: 8),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF1D9375).withOpacity(0.1),
+                                color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,

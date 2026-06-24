@@ -308,7 +308,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       secondary: Icon(icon, color: Colors.grey[600]),
       value: value,
       onChanged: onChanged,
-      activeColor: Theme.of(context).primaryColor,
+      activeThumbColor: Theme.of(context).primaryColor,
     );
   }
 

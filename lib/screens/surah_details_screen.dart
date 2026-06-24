@@ -157,13 +157,13 @@ class SurahDetailsScreen extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             const Color(0xFF1D9375),
-            const Color(0xFF1D9375).withOpacity(0.8),
+            const Color(0xFF1D9375).withValues(alpha: 0.8),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF1D9375).withOpacity(0.3),
+            color: const Color(0xFF1D9375).withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -187,7 +187,7 @@ class SurahDetailsScreen extends StatelessWidget {
             style: GoogleFonts.notoSansBengali(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
             ),
           ),
           const SizedBox(height: 4),
@@ -197,11 +197,11 @@ class SurahDetailsScreen extends StatelessWidget {
             style: GoogleFonts.notoSansBengali(
               fontSize: 14,
               fontStyle: FontStyle.italic,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
           ),
           const SizedBox(height: 16),
-          Divider(color: Colors.white.withOpacity(0.3)),
+          Divider(color: Colors.white.withValues(alpha: 0.3)),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -221,7 +221,7 @@ class SurahDetailsScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -258,7 +258,7 @@ class SurahDetailsScreen extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF1D9375).withOpacity(0.05),
+              const Color(0xFF1D9375).withValues(alpha: 0.05),
               Colors.white,
             ],
           ),
@@ -271,7 +271,7 @@ class SurahDetailsScreen extends StatelessWidget {
               Icon(
                 Icons.menu_book,
                 size: 32,
-                color: const Color(0xFF1D9375).withOpacity(0.7),
+                color: const Color(0xFF1D9375).withValues(alpha: 0.7),
               ),
               const SizedBox(height: 16),
               Text(
@@ -332,13 +332,13 @@ class _VerseCard extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         const Color(0xFF1D9375),
-                        const Color(0xFF1D9375).withOpacity(0.7),
+                        const Color(0xFF1D9375).withValues(alpha: 0.7),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF1D9375).withOpacity(0.3),
+                        color: const Color(0xFF1D9375).withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -372,10 +372,10 @@ class _VerseCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF1D9375).withOpacity(0.03),
+                color: const Color(0xFF1D9375).withValues(alpha: 0.03),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: const Color(0xFF1D9375).withOpacity(0.1),
+                  color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                 ),
               ),
               child: Text(

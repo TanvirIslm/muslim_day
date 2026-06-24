@@ -23,7 +23,7 @@ class AppCautionPage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0xFF1D9375).withOpacity(0.1),
+              const Color(0xFF1D9375).withValues(alpha: 0.1),
               Colors.white,
             ],
           ),
@@ -136,7 +136,7 @@ class AppCautionPage extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade300, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 4,
             offset: const Offset(0, 2),
@@ -152,7 +152,7 @@ class AppCautionPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1D9375).withOpacity(0.1),
+                  color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(icon, color: const Color(0xFF1D9375), size: 24),

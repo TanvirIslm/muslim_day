@@ -156,7 +156,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF1D9375).withOpacity(0.1),
+              color: const Color(0xFF1D9375).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Icon(
@@ -224,7 +224,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1D9375).withOpacity(0.1),
+                      color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Icon(
@@ -266,7 +266,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _getRatingColor(mosque['rating']).withOpacity(0.1),
+                      color: _getRatingColor(mosque['rating']).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -370,7 +370,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1D9375).withOpacity(0.1),
+                      color: const Color(0xFF1D9375).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
@@ -394,7 +394,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.star, size: 16, color: Colors.amber),
+                            const Icon(Icons.star, size: 16, color: Colors.amber),
                             const SizedBox(width: 4),
                             Text(
                               '${mosque['rating']} • ${mosque['distance']}',

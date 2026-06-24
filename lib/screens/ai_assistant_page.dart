@@ -107,7 +107,7 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(Icons.psychology, size: 24),
@@ -190,7 +190,7 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: Colors.grey.withValues(alpha: 0.2),
                   spreadRadius: 1,
                   blurRadius: 4,
                   offset: const Offset(0, -2),
@@ -276,10 +276,10 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!message.isUser) ...[
-            CircleAvatar(
+            const CircleAvatar(
               radius: 16,
-              backgroundColor: const Color(0xFF1D9375),
-              child: const Icon(Icons.psychology, size: 18, color: Colors.white),
+              backgroundColor: Color(0xFF1D9375),
+              child: Icon(Icons.psychology, size: 18, color: Colors.white),
             ),
             const SizedBox(width: 8),
           ],

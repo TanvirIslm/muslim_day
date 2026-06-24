@@ -182,7 +182,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0xFF1D9375).withOpacity(0.05),
+              const Color(0xFF1D9375).withValues(alpha: 0.05),
               Colors.white,
             ],
           ),
@@ -275,12 +275,12 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
                             end: Alignment.bottomRight,
                             colors: [
                               const Color(0xFF1D9375),
-                              const Color(0xFF1D9375).withOpacity(0.7),
+                              const Color(0xFF1D9375).withValues(alpha: 0.7),
                             ],
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF1D9375).withOpacity(0.3),
+                              color: const Color(0xFF1D9375).withValues(alpha: 0.3),
                               blurRadius: 20,
                               spreadRadius: 5,
                               offset: const Offset(0, 10),
@@ -303,7 +303,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
                                 'ট্যাপ করুন',
                                 style: GoogleFonts.notoSansBengali(
                                   fontSize: 16,
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.white.withValues(alpha: 0.9),
                                 ),
                               ),
                             ],
@@ -378,7 +378,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
         border: Border.all(color: Colors.grey.shade200, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 4,
             offset: const Offset(0, 2),
@@ -427,7 +427,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: const Color(0xFF1D9375).withOpacity(0.3),
+                    color: const Color(0xFF1D9375).withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),

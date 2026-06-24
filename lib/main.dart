@@ -75,7 +75,6 @@ class MuslimDayApp extends StatelessWidget {
               primary: Color(0xFF1A4D4D),
               secondary: Color(0xFF1D9375),
               surface: Colors.white,
-              background: Color(0xFFF5F5F5),
               error: Colors.red,
             ),
           ),
@@ -111,11 +110,9 @@ class MuslimDayApp extends StatelessWidget {
               primary: Color(0xFF1D9375),
               secondary: Color(0xFF4DB6AC),
               surface: Color(0xFF1F1F1F),
-              background: Color(0xFF121212),
               error: Colors.redAccent,
             ),
           ),
-          
           home: const HomeScreen(),
         );
       },

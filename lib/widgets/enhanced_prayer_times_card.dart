@@ -32,7 +32,7 @@ class EnhancedPrayerTimesCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF1D9375).withOpacity(0.3),
+            color: const Color(0xFF1D9375).withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -123,7 +123,7 @@ class EnhancedPrayerTimesCard extends StatelessWidget {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -222,8 +222,8 @@ class EnhancedPrayerTimesCard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isActive 
-                  ? Colors.white.withOpacity(0.2)
-                  : Colors.white.withOpacity(0.1),
+                  ? Colors.white.withValues(alpha: 0.2)
+                  : Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
               border: isActive
                   ? Border.all(color: Colors.white, width: 2)
@@ -237,7 +237,7 @@ class EnhancedPrayerTimesCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: isActive 
                         ? Colors.white
-                        : Colors.white.withOpacity(0.2),
+                        : Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(

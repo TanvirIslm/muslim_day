@@ -214,9 +214,9 @@ class PrayerTimesCard extends StatelessWidget {
     // Convert to 12-hour format
     String formatTime12Hour(DateTime time) {
       int hour = time.hour;
-      if (hour > 12)
+      if (hour > 12) {
         hour -= 12;
-      else if (hour == 0) hour = 12;
+      } else if (hour == 0) hour = 12;
       String minute = time.minute.toString().padLeft(2, '0');
       return '$hour:$minute';
     }
@@ -234,7 +234,7 @@ class PrayerTimesCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: isActive
             ? Border.all(
-                color: const Color(0xFF1D9375).withOpacity(0.3), width: 1)
+                color: const Color(0xFF1D9375).withValues(alpha: 0.3), width: 1)
             : null,
       ),
       child: Row(

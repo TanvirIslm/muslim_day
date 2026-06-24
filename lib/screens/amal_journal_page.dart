@@ -33,7 +33,7 @@ class AmalJournalPage extends StatelessWidget {
                 provider.totalPoints.toString(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              backgroundColor: Colors.amber.withOpacity(0.1),
+              backgroundColor: Colors.amber.withValues(alpha: 0.1),
               side: BorderSide(color: Colors.amber.shade300),
             ),
           ),
@@ -272,7 +272,7 @@ class _AmalItem extends StatelessWidget {
       elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: isDone ? Colors.teal.withOpacity(0.08) : Colors.white,
+      color: isDone ? Colors.teal.withValues(alpha: 0.08) : Colors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),

@@ -157,7 +157,7 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.orange.withOpacity(0.3),
+            color: Colors.orange.withValues(alpha: 0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -189,7 +189,7 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -438,7 +438,7 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
                           child: Icon(
                             Icons.auto_awesome,
                             size: 50,
-                            color: (badge['color'] as Color).withOpacity(0.2),
+                            color: (badge['color'] as Color).withValues(alpha: 0.2),
                           ),
                         );
                       },
@@ -567,13 +567,13 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      color: isYou ? const Color(0xFF1D9375).withOpacity(0.1) : null,
+      color: isYou ? const Color(0xFF1D9375).withValues(alpha: 0.1) : null,
       child: ListTile(
         leading: Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: getRankColor().withOpacity(0.2),
+            color: getRankColor().withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
           child: Center(
