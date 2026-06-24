@@ -44,19 +44,28 @@ class MenuScreen extends StatelessWidget {
             icon: Icons.local_fire_department,
             title: 'নামাজ স্ট্রিক ও পুরস্কার',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PrayerStreakPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PrayerStreakPage())),
           ),
           _buildMenuItem(
             icon: Icons.school_outlined,
             title: 'ইসলামিক শিক্ষার পথ',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LearningPathPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const LearningPathPage())),
           ),
           _buildMenuItem(
             icon: Icons.psychology,
             title: 'AI সহায়ক',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AIAssistantPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AIAssistantPage())),
           ),
 
           // ⚙️ Settings Section
@@ -65,13 +74,19 @@ class MenuScreen extends StatelessWidget {
             icon: Icons.info_outline,
             title: 'বিশেষ দ্রষ্টব্য (FAQ)',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AppCautionPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AppCautionPage())),
           ),
           _buildMenuItem(
             icon: Icons.settings_outlined,
             title: 'সেটিংস',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AppSettingsPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AppSettingsPage())),
           ),
 
           // 🛠️ Tools Section
@@ -80,38 +95,61 @@ class MenuScreen extends StatelessWidget {
             icon: Icons.explore_outlined,
             title: 'কিবলা কম্পাস',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QiblaCompassScreen())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const QiblaCompassScreen())),
           ),
           _buildMenuItem(
             icon: Icons.format_list_numbered,
             title: 'তাসবীহ',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TasbeehCounterScreen())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const TasbeehCounterScreen())),
           ),
           _buildMenuItem(
             icon: Icons.book,
             title: 'দোয়া সমূহ',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DuaCollectionPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const DuaCollectionPage())),
           ),
           _buildMenuItem(
             icon: Icons.mosque_outlined,
             title: 'নিকটবর্তী মসজিদ',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NearbyMosquePage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NearbyMosquePage())),
           ),
 
           // 📚 Knowledge Section
           _buildSectionHeader('প্রয়োজনীয় ইলম', primaryColor),
-          _buildMenuItem(icon: Icons.book_outlined, title: 'কুরআন-হাদীস', primaryColor: primaryColor, onTap: () {}),
-          _buildMenuItem(icon: Icons.web_stories_outlined, title: 'ফজর ফাইটার ওয়েবসাইট', primaryColor: primaryColor, onTap: () {}),
+          _buildMenuItem(
+              icon: Icons.book_outlined,
+              title: 'কুরআন-হাদীস',
+              primaryColor: primaryColor,
+              onTap: () {}),
+          _buildMenuItem(
+              icon: Icons.web_stories_outlined,
+              title: 'ফজর ফাইটার ওয়েবসাইট',
+              primaryColor: primaryColor,
+              onTap: () {}),
           _buildMenuItem(
             icon: Icons.assignment_outlined,
             title: 'মাসনুন আমল',
             primaryColor: primaryColor,
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MasnoonAmalPage())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const MasnoonAmalPage())),
           ),
-          
+
           const SizedBox(height: 30),
         ],
       ),
@@ -164,7 +202,8 @@ class MenuScreen extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey.shade400),
+        trailing: Icon(Icons.arrow_forward_ios,
+            size: 14, color: Colors.grey.shade400),
         onTap: onTap,
       ),
     );

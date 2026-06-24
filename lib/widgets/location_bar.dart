@@ -17,7 +17,7 @@ class LocationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Defined primary green here to keep it consistent
-    const Color brandGreen = Color(0xFF1D9375); 
+    const Color brandGreen = Color(0xFF1D9375);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -25,7 +25,8 @@ class LocationBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.location_on, color: Colors.white, size: 20), // Icon is now white
+          const Icon(Icons.location_on,
+              color: Colors.white, size: 20), // Icon is now white
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -34,7 +35,8 @@ class LocationBar extends StatelessWidget {
                 Text(
                   country,
                   style: const TextStyle(
-                    color: Colors.white70, // Slightly transparent white for country
+                    color: Colors
+                        .white70, // Slightly transparent white for country
                     fontSize: 12,
                   ),
                 ),
@@ -57,9 +59,11 @@ class LocationBar extends StatelessWidget {
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(
-                        strokeWidth: 2, color: Colors.white), // Spinner is now white
+                        strokeWidth: 2,
+                        color: Colors.white), // Spinner is now white
                   )
-                : const Icon(Icons.my_location, color: Colors.white, size: 24), // Button is now white
+                : const Icon(Icons.my_location,
+                    color: Colors.white, size: 24), // Button is now white
             onPressed: isLoading ? null : onLocationPressed,
             tooltip: "Detect Current Location",
           ),

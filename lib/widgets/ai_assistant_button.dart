@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/ai_assistant_page.dart'; 
+import '../screens/ai_assistant_page.dart';
 
 class AIAssistantButton extends StatefulWidget {
   const AIAssistantButton({super.key});
@@ -50,8 +50,8 @@ class _AIAssistantButtonState extends State<AIAssistantButton>
           );
         },
         child: const Icon(
-          Icons.auto_awesome, 
-          color: Colors.white, 
+          Icons.auto_awesome,
+          color: Colors.white,
           size: 20,
         ),
       ),

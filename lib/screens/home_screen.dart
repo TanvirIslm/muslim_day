@@ -8,7 +8,7 @@ import 'quran_screen.dart';
 import 'menu_screens.dart';
 import '../providers/amal_provider.dart';
 import 'amal_journal_page.dart';
-import 'mahfil_page.dart';
+import 'dua.dart';
 import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // Sets the status bar color to your theme green globally
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: const Color(0xFF1D9375), 
+      statusBarColor: const Color(0xFF1D9375),
       statusBarIconBrightness: Brightness.light,
     ));
   }
@@ -57,13 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       // The floatingActionButton property automatically handles placement
       // It will only show if on the Home tab (_selectedIndex == 0)
-      floatingActionButton: _selectedIndex == 0 ? const AIAssistantButton() : null,
-      
+      floatingActionButton:
+          _selectedIndex == 0 ? const AIAssistantButton() : null,
+
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
       ),
-      
+
       bottomNavigationBar: BottomNav(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

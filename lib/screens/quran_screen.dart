@@ -9,10 +9,22 @@ import 'surah_details_screen.dart';
 
 String _getBengaliNumber(int number) {
   const Map<String, String> bengaliMap = {
-    '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
-    '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+    '0': '০',
+    '1': '১',
+    '2': '২',
+    '3': '৩',
+    '4': '৪',
+    '5': '৫',
+    '6': '৬',
+    '7': '৭',
+    '8': '৮',
+    '9': '৯'
   };
-  return number.toString().split('').map((char) => bengaliMap[char] ?? char).join();
+  return number
+      .toString()
+      .split('')
+      .map((char) => bengaliMap[char] ?? char)
+      .join();
 }
 
 class QuranScreen extends StatelessWidget {
@@ -35,17 +47,20 @@ class QuranScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const QuranSettingsPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const QuranSettingsPage()),
                 );
               },
             ),
           ],
           bottom: TabBar(
             labelColor: Colors.white, // Active tab white
-            unselectedLabelColor: Colors.white70, // Inactive tab slightly transparent
+            unselectedLabelColor:
+                Colors.white70, // Inactive tab slightly transparent
             indicatorColor: Colors.white, // Indicator matches AppBar
             indicatorWeight: 3,
-            labelStyle: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 15),
+            labelStyle: GoogleFonts.notoSansBengali(
+                fontWeight: FontWeight.bold, fontSize: 15),
             tabs: const [
               Tab(text: "আল-কুরআন"),
               Tab(text: "বুকমার্কস"),
@@ -55,7 +70,8 @@ class QuranScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             _buildSurahListTab(context),
-            const Center(child: Text("বুকমার্কস", style: TextStyle(fontSize: 20))),
+            const Center(
+                child: Text("বুকমার্কস", style: TextStyle(fontSize: 20))),
           ],
         ),
       ),
@@ -70,7 +86,8 @@ class QuranScreen extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemCount: 114,
-            separatorBuilder: (context, index) => Divider(height: 1, indent: 80, endIndent: 20, color: Colors.grey[200]),
+            separatorBuilder: (context, index) => Divider(
+                height: 1, indent: 80, endIndent: 20, color: Colors.grey[200]),
             itemBuilder: (context, index) {
               final surahNumber = index + 1;
               final bengaliData = bengaliSurahData[index];
@@ -83,7 +100,8 @@ class QuranScreen extends StatelessWidget {
                   height: 42,
                   decoration: BoxDecoration(
                     // Using primaryColor with opacity for the number box
-                    color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                    color:
+                        Theme.of(context).primaryColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   alignment: Alignment.center,
@@ -98,7 +116,8 @@ class QuranScreen extends StatelessWidget {
                 ),
                 title: Text(
                   bengaliData.name,
-                  style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.w600, color: Colors.black),
+                  style: GoogleFonts.notoSansBengali(
+                      fontWeight: FontWeight.w600, color: Colors.black),
                 ),
                 subtitle: Text(
                   '${bengaliData.meaning} (${_getBengaliNumber(verseCount)})',

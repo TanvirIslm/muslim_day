@@ -14,6 +14,8 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      elevation: 8,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
@@ -21,9 +23,15 @@ class BottomNav extends StatelessWidget {
           label: 'হোম',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.campaign_outlined),
-          activeIcon: Icon(Icons.campaign),
-          label: 'কমিউনিটি',
+          icon: ImageIcon(
+            AssetImage('assets/dua_icon.png'),
+            size: 24,
+          ),
+          activeIcon: ImageIcon(
+            AssetImage('assets/dua_icon.png'),
+            size: 26,
+          ),
+          label: 'দোয়া',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_book_outlined),
@@ -45,8 +53,9 @@ class BottomNav extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       onTap: onItemTapped,
       showUnselectedLabels: true,
+      // ওভারফ্লো ফিক্স করার জন্য সাইজ অ্যাডজাস্ট করা হয়েছে
       selectedFontSize: 12,
-      unselectedFontSize: 12,
+      unselectedFontSize: 10,
     );
   }
 }

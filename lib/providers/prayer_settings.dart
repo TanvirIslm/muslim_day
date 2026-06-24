@@ -94,7 +94,7 @@ class PrayerSettings extends ChangeNotifier {
   List<ExtendedPrayerTime> getExtendedPrayerTimes(DateTime date) {
     final prayerTimes = PrayerTimes.today(_coordinates, calculationParams);
     final List<ExtendedPrayerTime> times = [];
-    
+
     // Fajr
     times.add(ExtendedPrayerTime(
       name: 'Fajr',
@@ -256,7 +256,8 @@ class PrayerSettings extends ChangeNotifier {
 
     notifyListeners();
   }
-Future<bool> detectCurrentLocation() async {
+
+  Future<bool> detectCurrentLocation() async {
     _setLoading(true);
 
     try {
@@ -309,12 +310,12 @@ Future<bool> detectCurrentLocation() async {
 
         if (placemarks.isNotEmpty) {
           geo.Placemark place = placemarks[0];
-          
+
           // Try to get a meaningful name. Sometimes locality is null, so we check subAdministrativeArea too
           String city = place.locality ?? place.subAdministrativeArea ?? "";
           if (city.isNotEmpty) {
-             _locationName = "$city, ${place.country ?? 'বাংলাদেশ'}";
-             nameFound = true;
+            _locationName = "$city, ${place.country ?? 'বাংলাদেশ'}";
+            nameFound = true;
           }
         }
       } catch (e) {
@@ -323,7 +324,8 @@ Future<bool> detectCurrentLocation() async {
 
       // Attempt 2: Mathematical Fallback (If internet geocoding fails)
       if (!nameFound) {
-         _locationName = _getClosestDistrictName(position.latitude, position.longitude);
+        _locationName =
+            _getClosestDistrictName(position.latitude, position.longitude);
       }
 
       // Save to phone memory
@@ -361,10 +363,15 @@ Future<bool> detectCurrentLocation() async {
     String closestName = "অজানা লোকেশন";
 
     for (var district in fallbackDistricts) {
-      double dLat = (district["lat"] - currentLat) * 0.0174533; // convert to radians
+      double dLat =
+          (district["lat"] - currentLat) * 0.0174533; // convert to radians
       double dLng = (district["lng"] - currentLng) * 0.0174533;
       // Simple Pythagorean distance approximation
-      double a = dLat * dLat + dLng * dLng * cos(currentLat * 0.0174533) * cos(district["lat"] * 0.0174533);
+      double a = dLat * dLat +
+          dLng *
+              dLng *
+              cos(currentLat * 0.0174533) *
+              cos(district["lat"] * 0.0174533);
       double distance = sqrt(a);
 
       if (distance < minDistance) {
@@ -375,6 +382,7 @@ Future<bool> detectCurrentLocation() async {
 
     return closestName;
   }
+
   // --- Save & Load ---
   Future<void> _loadSettings() async {
     _setLoading(true);
@@ -394,7 +402,7 @@ Future<bool> detectCurrentLocation() async {
     String madhabName = _prefs.getString('madhab') ?? _madhab.name;
     _madhab = Madhab.values
         .firstWhere((m) => m.name == madhabName, orElse: () => Madhab.hanafi);
-        
+
     _setLoading(false);
   }
 }

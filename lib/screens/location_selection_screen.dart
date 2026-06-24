@@ -364,7 +364,7 @@ class _LocationSelectionScreenState extends State<LocationSelectionScreen> {
                     ],
                   ),
                 ),
-                
+
                 // The list of districts wrapped in a SliverList
                 SliverOpacity(
                   opacity: _isGpsMode ? 0.5 : 1.0,

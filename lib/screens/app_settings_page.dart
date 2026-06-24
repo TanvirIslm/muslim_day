@@ -60,29 +60,29 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             builder: (context, ps, _) {
               return _buildCard([
                 _buildListTile(
-                  context, 
-                  'বর্তমান লোকেশন', 
-                  ps.locationName, 
-                  Icons.location_on, 
-                  primaryColor, 
+                  context,
+                  'বর্তমান লোকেশন',
+                  ps.locationName,
+                  Icons.location_on,
+                  primaryColor,
                   () => _goToPrayerSettings(context),
                   showDivider: true,
                 ),
                 _buildListTile(
-                  context, 
-                  'গণনা পদ্ধতি', 
-                  ps.getCalculationMethodName(ps.calculationMethod), 
-                  Icons.calculate, 
-                  primaryColor, 
+                  context,
+                  'গণনা পদ্ধতি',
+                  ps.getCalculationMethodName(ps.calculationMethod),
+                  Icons.calculate,
+                  primaryColor,
                   () => _goToPrayerSettings(context),
                   showDivider: true,
                 ),
                 _buildListTile(
-                  context, 
-                  'মাযহাব (আসর হিসাব)', 
-                  ps.madhab == Madhab.hanafi ? 'হানাফী' : 'শাফেয়ী', 
-                  Icons.school, 
-                  primaryColor, 
+                  context,
+                  'মাযহাব (আসর হিসাব)',
+                  ps.madhab == Madhab.hanafi ? 'হানাফী' : 'শাফেয়ী',
+                  Icons.school,
+                  primaryColor,
                   () => _goToPrayerSettings(context),
                   showDivider: false,
                 ),
@@ -96,20 +96,20 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           _buildSectionHeader(context, 'নোটিফিকেশন'),
           _buildCard([
             _buildSwitchTile(
-              context, 
-              'নামাজের সময় নোটিফিকেশন', 
-              'ওয়াক্ত শুরু হলে আপনাকে জানানো হবে', 
-              Icons.notifications_active, 
-              true, 
+              context,
+              'নামাজের সময় নোটিফিকেশন',
+              'ওয়াক্ত শুরু হলে আপনাকে জানানো হবে',
+              Icons.notifications_active,
+              true,
               (v) {},
               showDivider: true,
             ),
             _buildSwitchTile(
-              context, 
-              'আজান সাউন্ড', 
-              'নোটিফিকেশনের সাথে আজান বাজবে', 
-              Icons.volume_up, 
-              false, 
+              context,
+              'আজান সাউন্ড',
+              'নোটিফিকেশনের সাথে আজান বাজবে',
+              Icons.volume_up,
+              false,
               (v) {},
               showDivider: false,
             ),
@@ -120,28 +120,33 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           // --- 4. App Info ---
           _buildSectionHeader(context, 'অ্যাপ সম্পর্কে'),
           _buildCard([
-            _buildInfoTile('সংস্করণ', '২.০.০', Icons.info_outline, primaryColor),
-            Divider(height: 1, indent: 64, endIndent: 16, color: Colors.grey.shade200),
+            _buildInfoTile(
+                'সংস্করণ', '২.০.০', Icons.info_outline, primaryColor),
+            Divider(
+                height: 1,
+                indent: 64,
+                endIndent: 16,
+                color: Colors.grey.shade200),
             _buildListTile(
-              context, 
-              'গোপনীয়তা নীতি', 
-              'ডেটা ব্যবহারের নীতি', 
-              Icons.privacy_tip_outlined, 
-              primaryColor, 
+              context,
+              'গোপনীয়তা নীতি',
+              'ডেটা ব্যবহারের নীতি',
+              Icons.privacy_tip_outlined,
+              primaryColor,
               () => _showPrivacyPolicy(context),
               showDivider: true,
             ),
             _buildListTile(
-              context, 
-              'শর্তাবলী', 
-              'ব্যবহারের শর্তাবলী', 
-              Icons.description_outlined, 
-              primaryColor, 
+              context,
+              'শর্তাবলী',
+              'ব্যবহারের শর্তাবলী',
+              Icons.description_outlined,
+              primaryColor,
               () => _showTermsOfService(context),
               showDivider: false,
             ),
           ]),
-          
+
           const SizedBox(height: 40),
         ],
       ),
@@ -150,7 +155,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
   // --- Navigation Helpers ---
   void _goToPrayerSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const PrayerSettingsPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const PrayerSettingsPage()));
   }
 
   // --- UI Builder Methods ---
@@ -189,7 +195,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     );
   }
 
-  Widget _buildThemeSelector(BuildContext context, ThemeProvider themeProvider, Color primaryColor) {
+  Widget _buildThemeSelector(
+      BuildContext context, ThemeProvider themeProvider, Color primaryColor) {
     return Column(
       children: [
         Padding(
@@ -202,22 +209,33 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   color: primaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.palette_outlined, color: primaryColor, size: 22),
+                child:
+                    Icon(Icons.palette_outlined, color: primaryColor, size: 22),
               ),
               const SizedBox(width: 16),
               Expanded(
-                child: Text(
-                  'অ্যাপ থিম', 
-                  style: GoogleFonts.notoSansBengali(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black87)
-                ),
+                child: Text('অ্যাপ থিম',
+                    style: GoogleFonts.notoSansBengali(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87)),
               ),
               SegmentedButton<ThemeMode>(
                 segments: const [
-                  ButtonSegment(value: ThemeMode.light, icon: Icon(Icons.light_mode, size: 18)),
-                  ButtonSegment(value: ThemeMode.dark, icon: Icon(Icons.dark_mode, size: 18)),
+                  ButtonSegment(
+                      value: ThemeMode.light,
+                      icon: Icon(Icons.light_mode, size: 18)),
+                  ButtonSegment(
+                      value: ThemeMode.dark,
+                      icon: Icon(Icons.dark_mode, size: 18)),
                 ],
-                selected: {themeProvider.themeMode == ThemeMode.dark ? ThemeMode.dark : ThemeMode.light},
-                onSelectionChanged: (newSelection) => themeProvider.setThemeMode(newSelection.first),
+                selected: {
+                  themeProvider.themeMode == ThemeMode.dark
+                      ? ThemeMode.dark
+                      : ThemeMode.light
+                },
+                onSelectionChanged: (newSelection) =>
+                    themeProvider.setThemeMode(newSelection.first),
                 style: SegmentedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   visualDensity: VisualDensity.compact,
@@ -226,17 +244,21 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             ],
           ),
         ),
-        Divider(height: 1, indent: 64, endIndent: 16, color: Colors.grey.shade200),
+        Divider(
+            height: 1, indent: 64, endIndent: 16, color: Colors.grey.shade200),
       ],
     );
   }
 
-  Widget _buildSwitchTile(BuildContext context, String title, String subtitle, IconData icon, bool value, Function(bool) onChanged, {bool showDivider = false}) {
+  Widget _buildSwitchTile(BuildContext context, String title, String subtitle,
+      IconData icon, bool value, Function(bool) onChanged,
+      {bool showDivider = false}) {
     final primaryColor = Theme.of(context).primaryColor;
     return Column(
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -245,16 +267,16 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             ),
             child: Icon(icon, color: primaryColor, size: 22),
           ),
-          title: Text(
-            title, 
-            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black87)
-          ),
+          title: Text(title,
+              style: GoogleFonts.notoSansBengali(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black87)),
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: Text(
-              subtitle, 
-              style: GoogleFonts.notoSansBengali(fontSize: 13, color: Colors.grey.shade600, height: 1.3)
-            ),
+            child: Text(subtitle,
+                style: GoogleFonts.notoSansBengali(
+                    fontSize: 13, color: Colors.grey.shade600, height: 1.3)),
           ),
           trailing: Switch(
             value: value,
@@ -263,16 +285,23 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           ),
         ),
         if (showDivider)
-          Divider(height: 1, indent: 64, endIndent: 16, color: Colors.grey.shade200),
+          Divider(
+              height: 1,
+              indent: 64,
+              endIndent: 16,
+              color: Colors.grey.shade200),
       ],
     );
   }
 
-  Widget _buildListTile(BuildContext context, String title, String subtitle, IconData icon, Color primaryColor, VoidCallback onTap, {bool showDivider = false}) {
+  Widget _buildListTile(BuildContext context, String title, String subtitle,
+      IconData icon, Color primaryColor, VoidCallback onTap,
+      {bool showDivider = false}) {
     return Column(
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -281,29 +310,36 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
             ),
             child: Icon(icon, color: primaryColor, size: 22),
           ),
-          title: Text(
-            title, 
-            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black87)
-          ),
+          title: Text(title,
+              style: GoogleFonts.notoSansBengali(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black87)),
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: Text(
-              subtitle, 
-              style: GoogleFonts.notoSansBengali(fontSize: 13, color: Colors.grey.shade600, height: 1.3)
-            ),
+            child: Text(subtitle,
+                style: GoogleFonts.notoSansBengali(
+                    fontSize: 13, color: Colors.grey.shade600, height: 1.3)),
           ),
-          trailing: Icon(Icons.chevron_right, size: 20, color: Colors.grey.shade400),
+          trailing:
+              Icon(Icons.chevron_right, size: 20, color: Colors.grey.shade400),
           onTap: onTap,
         ),
         if (showDivider)
-          Divider(height: 1, indent: 64, endIndent: 16, color: Colors.grey.shade200),
+          Divider(
+              height: 1,
+              indent: 64,
+              endIndent: 16,
+              color: Colors.grey.shade200),
       ],
     );
   }
 
-  Widget _buildInfoTile(String title, String subtitle, IconData icon, Color primaryColor) {
+  Widget _buildInfoTile(
+      String title, String subtitle, IconData icon, Color primaryColor) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       leading: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -312,55 +348,63 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
         ),
         child: Icon(icon, color: primaryColor, size: 22),
       ),
-      title: Text(
-        title, 
-        style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black87)
-      ),
-      trailing: Text(
-        subtitle, 
-        style: GoogleFonts.notoSansBengali(fontSize: 14, color: Colors.grey.shade600, fontWeight: FontWeight.bold)
-      ),
+      title: Text(title,
+          style: GoogleFonts.notoSansBengali(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: Colors.black87)),
+      trailing: Text(subtitle,
+          style: GoogleFonts.notoSansBengali(
+              fontSize: 14,
+              color: Colors.grey.shade600,
+              fontWeight: FontWeight.bold)),
     );
   }
 
   // --- Dialogs ---
   void _showPrivacyPolicy(BuildContext context) {
     showDialog(
-      context: context, 
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text('গোপনীয়তা নীতি', style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold)), 
-        content: Text(
-          'আমরা আপনার ব্যক্তিগত তথ্যকে সম্মান করি। এই অ্যাপটি আপনার অবস্থান এবং সেটিংস শুধুমাত্র নামাজের সময় গণনার জন্য ব্যবহার করে। কোনো তথ্য তৃতীয় পক্ষের সাথে শেয়ার করা হয় না।', 
-          style: GoogleFonts.notoSansBengali(height: 1.4)
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(), 
-            child: Text('বন্ধ করুন', style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor))
-          )
-        ],
-      )
-    );
+        context: context,
+        builder: (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              title: Text('গোপনীয়তা নীতি',
+                  style:
+                      GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold)),
+              content: Text(
+                  'আমরা আপনার ব্যক্তিগত তথ্যকে সম্মান করি। এই অ্যাপটি আপনার অবস্থান এবং সেটিংস শুধুমাত্র নামাজের সময় গণনার জন্য ব্যবহার করে। কোনো তথ্য তৃতীয় পক্ষের সাথে শেয়ার করা হয় না।',
+                  style: GoogleFonts.notoSansBengali(height: 1.4)),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text('বন্ধ করুন',
+                        style: GoogleFonts.notoSansBengali(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor)))
+              ],
+            ));
   }
 
   void _showTermsOfService(BuildContext context) {
     showDialog(
-      context: context, 
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text('শর্তাবলী', style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold)), 
-        content: Text(
-          'এই অ্যাপটি ইসলামিক জীবনযাপনে সহায়তার জন্য তৈরি। প্রদত্ত সকল তথ্য ইসলামিক স্কলারদের মতামতের ভিত্তিতে তৈরি, তবে সময়ের সাথে তথ্যের পরিবর্তন হতে পারে। যেকোনো ভুলের জন্য আমরা ক্ষমাপ্রার্থী।', 
-          style: GoogleFonts.notoSansBengali(height: 1.4)
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(), 
-            child: Text('বন্ধ করুন', style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor))
-          )
-        ],
-      )
-    );
+        context: context,
+        builder: (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              title: Text('শর্তাবলী',
+                  style:
+                      GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold)),
+              content: Text(
+                  'এই অ্যাপটি ইসলামিক জীবনযাপনে সহায়তার জন্য তৈরি। প্রদত্ত সকল তথ্য ইসলামিক স্কলারদের মতামতের ভিত্তিতে তৈরি, তবে সময়ের সাথে তথ্যের পরিবর্তন হতে পারে। যেকোনো ভুলের জন্য আমরা ক্ষমাপ্রার্থী।',
+                  style: GoogleFonts.notoSansBengali(height: 1.4)),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text('বন্ধ করুন',
+                        style: GoogleFonts.notoSansBengali(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor)))
+              ],
+            ));
   }
 }

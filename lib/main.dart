@@ -42,7 +42,9 @@ class MuslimDayApp extends StatelessWidget {
         if (themeProvider.isLoading) {
           return const MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: Scaffold(body: Center(child: CircularProgressIndicator(color: appBrandColor))),
+            home: Scaffold(
+                body: Center(
+                    child: CircularProgressIndicator(color: appBrandColor))),
           );
         }
 
