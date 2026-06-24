@@ -30,12 +30,12 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
 
     try {
       final permissionStatus = await Permission.location.request();
-      
+
       if (permissionStatus.isGranted) {
         final position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high,
         );
-        
+
         setState(() {
           _currentPosition = position;
           _isLoading = false;
@@ -117,7 +117,8 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1D9375),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -249,7 +250,8 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.location_on, size: 14, color: Colors.grey[600]),
+                            Icon(Icons.location_on,
+                                size: 14, color: Colors.grey[600]),
                             const SizedBox(width: 4),
                             Text(
                               mosque['distance'],
@@ -264,9 +266,11 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _getRatingColor(mosque['rating']).withValues(alpha: 0.1),
+                      color: _getRatingColor(mosque['rating'])
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -394,7 +398,8 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            const Icon(Icons.star, size: 16, color: Colors.amber),
+                            const Icon(Icons.star,
+                                size: 16, color: Colors.amber),
                             const SizedBox(width: 4),
                             Text(
                               '${mosque['rating']} • ${mosque['distance']}',
@@ -415,7 +420,8 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
               const SizedBox(height: 12),
               _buildDetailRow(Icons.phone, 'ফোন', mosque['phone']),
               const SizedBox(height: 12),
-              _buildDetailRow(Icons.access_time, 'খোলা থাকে', mosque['openHours']),
+              _buildDetailRow(
+                  Icons.access_time, 'খোলা থাকে', mosque['openHours']),
               const SizedBox(height: 24),
               Row(
                 children: [
@@ -506,7 +512,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
     final lat = mosque['lat'];
     final lng = mosque['lng'];
     final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
-    
+
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else {
@@ -527,7 +533,7 @@ class _NearbyMosquePageState extends State<NearbyMosquePage> {
   Future<void> _callMosque(Map<String, dynamic> mosque) async {
     final phone = mosque['phone'];
     final url = 'tel:$phone';
-    
+
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {

@@ -3,13 +3,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:quran/quran.dart' as quran;
 import '../providers/quran_settings.dart';
-import 'quran_settings.dart'; 
+import 'quran_settings_page.dart';
 
 /// ইংরেজি সংখ্যাকে বাংলা সংখ্যায় রূপান্তর করে
 String _getBengaliNumber(int number) {
   const Map<String, String> bengaliMap = {
-    '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
-    '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+    '0': '০',
+    '1': '১',
+    '2': '২',
+    '3': '৩',
+    '4': '৪',
+    '5': '৫',
+    '6': '৬',
+    '7': '৭',
+    '8': '৮',
+    '9': '৯'
   };
   return number
       .toString()
@@ -39,7 +47,7 @@ class SurahDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final verseCount = quran.getVerseCount(surahNumber);
     final settings = Provider.of<QuranSettings>(context);
-    
+
     // ইংরেজি স্থানকে বাংলায় রূপান্তর
     final placeOfRevelation = quran.getPlaceOfRevelation(surahNumber);
     final revelationPlaceBengali =
@@ -47,7 +55,7 @@ class SurahDetailsScreen extends StatelessWidget {
 
     // !! নতুন লজিক: বিসমিল্লাহ কার্ড দেখানো হবে কিনা?
     final bool showBismillahCard = (surahNumber != 1 && surahNumber != 9);
-    
+
     // !! নতুন লজিক: মোট আইটেম সংখ্যা গণনা
     // ১ (হেডার) + আয়াত সংখ্যা + (বিসমিল্লাহ কার্ড থাকলে ১, না থাকলে ০)
     final int totalItemCount = 1 + verseCount + (showBismillahCard ? 1 : 0);
@@ -76,7 +84,8 @@ class SurahDetailsScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
+                MaterialPageRoute(
+                    builder: (context) => const QuranSettingsPage()),
               );
             },
           ),
@@ -100,9 +109,8 @@ class SurahDetailsScreen extends StatelessWidget {
       body: ListView.builder(
         padding: const EdgeInsets.all(16.0),
         // !! itemCount পরিবর্তন করা হয়েছে
-        itemCount: totalItemCount, 
+        itemCount: totalItemCount,
         itemBuilder: (context, index) {
-          
           // --- ১. সাব-হেডার (সর্বদা index 0) ---
           if (index == 0) {
             return _buildSubHeader(
@@ -115,7 +123,7 @@ class SurahDetailsScreen extends StatelessWidget {
           }
 
           // --- ৩. আয়াতসমূহ ---
-          
+
           // !! নতুন লজিক: আয়াতের নম্বর গণনা
           int verseNumber;
           if (showBismillahCard) {
@@ -129,7 +137,7 @@ class SurahDetailsScreen extends StatelessWidget {
           }
 
           final verseText = quran.getVerse(surahNumber, verseNumber);
-          
+
           // !! গুরুত্বপূর্ণ: এখানে আমরা ইংরেজি অনুবাদ পাচ্ছি
           final verseTranslation =
               quran.getVerseTranslation(surahNumber, verseNumber);
@@ -146,8 +154,7 @@ class SurahDetailsScreen extends StatelessWidget {
   }
 
   /// সাব-হেডার উইজেট
-  Widget _buildSubHeader(
-      String place, int verseCount, String meaning) {
+  Widget _buildSubHeader(String place, int verseCount, String meaning) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20.0),
       padding: const EdgeInsets.all(20),
@@ -209,7 +216,8 @@ class SurahDetailsScreen extends StatelessWidget {
               _buildInfoChip(Icons.place, place),
               _buildInfoChip(Icons.format_list_numbered,
                   'আয়াত: ${_getBengaliNumber(verseCount)}'),
-              _buildInfoChip(Icons.tag, 'সূরা: ${_getBengaliNumber(surahNumber)}'),
+              _buildInfoChip(
+                  Icons.tag, 'সূরা: ${_getBengaliNumber(surahNumber)}'),
             ],
           ),
         ],
@@ -367,7 +375,7 @@ class _VerseCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            
+
             // --- আরবি আয়াত ---
             Container(
               padding: const EdgeInsets.all(16),
@@ -391,7 +399,7 @@ class _VerseCard extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // --- বাংলা অনুবাদ ---
             if (settings.showTranslation) ...[
               const SizedBox(height: 16),
@@ -406,7 +414,8 @@ class _VerseCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(4),

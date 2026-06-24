@@ -96,7 +96,7 @@ class _HomeContentState extends State<HomeContent> {
           prayerStartTime = prayerStartTime.subtract(const Duration(days: 1));
         }
       }
-      
+
       if (now.isAfter(prayerStartTime) && now.isBefore(nextPrayerTime)) {
         _currentPrayer = prayer;
         _nextPrayer = nextPrayer;
@@ -110,12 +110,13 @@ class _HomeContentState extends State<HomeContent> {
           final totalDuration = nextPrayerTime.difference(prayerStartTime);
           final elapsedDuration = now.difference(prayerStartTime);
           if (totalDuration.inSeconds > 0) {
-            _prayerProgress = elapsedDuration.inSeconds / totalDuration.inSeconds;
+            _prayerProgress =
+                elapsedDuration.inSeconds / totalDuration.inSeconds;
           } else {
             _prayerProgress = 0.0;
           }
         }
-        
+
         _timeLeftToEnd = nextPrayerTime.difference(now);
         break;
       }

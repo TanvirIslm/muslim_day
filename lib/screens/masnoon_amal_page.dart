@@ -161,7 +161,10 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    ...((amal['steps'] as List<String>).asMap().entries.map((entry) {
+                    ...((amal['steps'] as List<String>)
+                        .asMap()
+                        .entries
+                        .map((entry) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Row(
@@ -172,7 +175,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
                               height: 24,
                               margin: const EdgeInsets.only(right: 8),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF1D9375).withValues(alpha: 0.1),
+                                color: const Color(0xFF1D9375)
+                                    .withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
@@ -230,7 +234,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
                   if (amal['reference'] != null) ...[
                     const SizedBox(height: 12),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.blue[50],
                         borderRadius: BorderRadius.circular(4),
@@ -261,7 +266,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'ফজরের সময়',
           'icon': Icons.brightness_3,
           'color': const Color(0xFF673AB7),
-          'description': 'ফজরের নামাজ জামাতের সাথে আদায় করা অত্যন্ত গুরুত্বপূর্ণ। এটি সারাদিনের বরকতের কারণ।',
+          'description':
+              'ফজরের নামাজ জামাতের সাথে আদায় করা অত্যন্ত গুরুত্বপূর্ণ। এটি সারাদিনের বরকতের কারণ।',
           'steps': [
             'ফজরের ওয়াক্ত হওয়ার আগেই ঘুম থেকে উঠুন',
             'ওজু করুন এবং মসজিদে যান',
@@ -276,7 +282,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'সকাল ও সন্ধ্যা',
           'icon': Icons.wb_sunny,
           'color': const Color(0xFFFF9800),
-          'description': 'দিনের শুরু ও শেষে আল্লাহর জিকির করা সুন্নাহ। এটি সারাদিন সুরক্ষার কারণ।',
+          'description':
+              'দিনের শুরু ও শেষে আল্লাহর জিকির করা সুন্নাহ। এটি সারাদিন সুরক্ষার কারণ।',
           'steps': [
             'সকালে ফজরের পর থেকে সূর্যোদয় পর্যন্ত',
             'সন্ধ্যায় আসরের পর থেকে মাগরিব পর্যন্ত',
@@ -291,7 +298,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'দিনে ৫ বার',
           'icon': Icons.mosque,
           'color': const Color(0xFF1D9375),
-          'description': 'পাঁচ ওয়াক্ত নামাজ ইসলামের ভিত্তি এবং আল্লাহর সাথে বান্দার সংযোগ।',
+          'description':
+              'পাঁচ ওয়াক্ত নামাজ ইসলামের ভিত্তি এবং আল্লাহর সাথে বান্দার সংযোগ।',
           'steps': [
             'ফজর - ভোর',
             'যোহর - দুপুর',
@@ -307,7 +315,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'দিনের যেকোনো সময়',
           'icon': Icons.menu_book,
           'color': const Color(0xFF2196F3),
-          'description': 'প্রতিদিন কুরআন তিলাওয়াত করা অত্যন্ত ফজিলতপূর্ণ। প্রতিটি অক্ষরে দশগুণ সওয়াব।',
+          'description':
+              'প্রতিদিন কুরআন তিলাওয়াত করা অত্যন্ত ফজিলতপূর্ণ। প্রতিটি অক্ষরে দশগুণ সওয়াব।',
           'steps': [
             'ওজু করে পবিত্র হয়ে বসুন',
             'কিবলামুখী হয়ে বসুন',
@@ -339,7 +348,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'প্রতি শুক্রবার',
           'icon': Icons.event,
           'color': const Color(0xFF1D9375),
-          'description': 'জুমার নামাজ প্রাপ্তবয়স্ক পুরুষদের জন্য ফরজ। এটি মুসলিমদের সাপ্তাহিক সমাবেশ।',
+          'description':
+              'জুমার নামাজ প্রাপ্তবয়স্ক পুরুষদের জন্য ফরজ। এটি মুসলিমদের সাপ্তাহিক সমাবেশ।',
           'steps': [
             'গোসল করুন ও সুগন্ধি ব্যবহার করুন',
             'সুন্দর পোশাক পরিধান করুন',
@@ -355,7 +365,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'প্রতি শুক্রবার',
           'icon': Icons.auto_stories,
           'color': const Color(0xFF2196F3),
-          'description': 'শুক্রবার সূরা কাহফ তিলাওয়াত করা সুন্নাহ। এটি দুই জুমার মধ্যে আলোকবর্তিকা।',
+          'description':
+              'শুক্রবার সূরা কাহফ তিলাওয়াত করা সুন্নাহ। এটি দুই জুমার মধ্যে আলোকবর্তিকা।',
           'steps': [
             'শুক্রবার দিনে যেকোনো সময় পড়ুন',
             'অর্থ বুঝে পড়ুন',
@@ -369,7 +380,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'প্রতি সপ্তাহ',
           'icon': Icons.restaurant,
           'color': const Color(0xFFFF9800),
-          'description': 'সোমবার ও বৃহস্পতিবার রোজা রাখা সুন্নাহ এবং অত্যন্ত ফজিলতপূর্ণ।',
+          'description':
+              'সোমবার ও বৃহস্পতিবার রোজা রাখা সুন্নাহ এবং অত্যন্ত ফজিলতপূর্ণ।',
           'steps': [
             'সেহরি খান',
             'ফজরের আগে নিয়ত করুন',
@@ -386,7 +398,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': '১৩, ১৪, ১৫ তারিখ',
           'icon': Icons.nightlight_round,
           'color': const Color(0xFF673AB7),
-          'description': 'প্রতি আরবি মাসের ১৩, ১৪ ও ১৫ তারিখে রোজা রাখা সুন্নাহ।',
+          'description':
+              'প্রতি আরবি মাসের ১৩, ১৪ ও ১৫ তারিখে রোজা রাখা সুন্নাহ।',
           'steps': [
             'আরবি মাসের মধ্য তারিখ নোট করুন',
             'এই তিন দিন রোজা রাখুন',
@@ -415,7 +428,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': 'রমজান মাস',
           'icon': Icons.mosque,
           'color': const Color(0xFF1D9375),
-          'description': 'রমজান মাসের ৩০টি রোজা ফরজ। এটি ইসলামের পাঁচটি স্তম্ভের একটি।',
+          'description':
+              'রমজান মাসের ৩০টি রোজা ফরজ। এটি ইসলামের পাঁচটি স্তম্ভের একটি।',
           'steps': [
             'প্রতিদিন সেহরি খান',
             'ফজরের আগে নিয়ত করুন',
@@ -460,7 +474,8 @@ class _MasnoonAmalPageState extends State<MasnoonAmalPage> {
           'time': '১০ মুহাররম',
           'icon': Icons.event_note,
           'color': const Color(0xFF2196F3),
-          'description': 'মুহাররম মাসের ১০ তারিখে রোজা রাখা অত্যন্ত ফজিলতপূর্ণ।',
+          'description':
+              'মুহাররম মাসের ১০ তারিখে রোজা রাখা অত্যন্ত ফজিলতপূর্ণ।',
           'steps': [
             '৯ ও ১০ মুহাররম রোজা রাখুন',
             'অথবা ১০ ও ১১ মুহাররম',

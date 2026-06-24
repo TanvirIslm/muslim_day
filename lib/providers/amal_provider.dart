@@ -11,8 +11,8 @@ class Amal {
   final int points; // !! নতুন: আমলের জন্য পয়েন্ট
 
   const Amal({
-    required this.id, 
-    required this.title, 
+    required this.id,
+    required this.title,
     required this.icon,
     required this.category,
     required this.points, // !! নতুন
@@ -26,41 +26,91 @@ class AmalProvider with ChangeNotifier {
   // অ্যাপে উপলভ্য সমস্ত আমলের তালিকা
   static const List<Amal> allAmals = [
     // !! 'points' যোগ করা হয়েছে
-    Amal(id: 'fajr', title: 'ফজর', icon: Icons.mosque_outlined, category: 'fardh', points: 10),
-    Amal(id: 'dhuhr', title: 'যোহর', icon: Icons.mosque_outlined, category: 'fardh', points: 10),
-    Amal(id: 'asr', title: 'আসর', icon: Icons.mosque_outlined, category: 'fardh', points: 10),
-    Amal(id: 'maghrib', title: 'মাগরিব', icon: Icons.mosque_outlined, category: 'fardh', points: 10),
-    Amal(id: 'isha', title: 'ইশা', icon: Icons.mosque_outlined, category: 'fardh', points: 10),
-    
-    Amal(id: 'tahajjud', title: 'তাহাজ্জুদ', icon: Icons.brightness_3_outlined, category: 'sunnah', points: 5),
-    Amal(id: 'morning_azkar', title: 'সকালের জিকির', icon: Icons.wb_sunny_outlined, category: 'sunnah', points: 5),
-    Amal(id: 'evening_azkar', title: 'সন্ধ্যার জিকির', icon: Icons.nightlight_round, category: 'sunnah', points: 5),
-    
-    Amal(id: 'quran', title: 'কুরআন তিলাওয়াত', icon: Icons.book_outlined, category: 'habit', points: 2),
-    Amal(id: 'sadaqah', title: 'সাদাকাহ (দান)', icon: Icons.volunteer_activism_outlined, category: 'habit', points: 2),
+    Amal(
+        id: 'fajr',
+        title: 'ফজর',
+        icon: Icons.mosque_outlined,
+        category: 'fardh',
+        points: 10),
+    Amal(
+        id: 'dhuhr',
+        title: 'যোহর',
+        icon: Icons.mosque_outlined,
+        category: 'fardh',
+        points: 10),
+    Amal(
+        id: 'asr',
+        title: 'আসর',
+        icon: Icons.mosque_outlined,
+        category: 'fardh',
+        points: 10),
+    Amal(
+        id: 'maghrib',
+        title: 'মাগরিব',
+        icon: Icons.mosque_outlined,
+        category: 'fardh',
+        points: 10),
+    Amal(
+        id: 'isha',
+        title: 'ইশা',
+        icon: Icons.mosque_outlined,
+        category: 'fardh',
+        points: 10),
+
+    Amal(
+        id: 'tahajjud',
+        title: 'তাহাজ্জুদ',
+        icon: Icons.brightness_3_outlined,
+        category: 'sunnah',
+        points: 5),
+    Amal(
+        id: 'morning_azkar',
+        title: 'সকালের জিকির',
+        icon: Icons.wb_sunny_outlined,
+        category: 'sunnah',
+        points: 5),
+    Amal(
+        id: 'evening_azkar',
+        title: 'সন্ধ্যার জিকির',
+        icon: Icons.nightlight_round,
+        category: 'sunnah',
+        points: 5),
+
+    Amal(
+        id: 'quran',
+        title: 'কুরআন তিলাওয়াত',
+        icon: Icons.book_outlined,
+        category: 'habit',
+        points: 2),
+    Amal(
+        id: 'sadaqah',
+        title: 'সাদাকাহ (দান)',
+        icon: Icons.volunteer_activism_outlined,
+        category: 'habit',
+        points: 2),
   ];
 
   final Map<String, List<String>> _completedAmals = {};
-  final Set<String> _datesWithAmal = {}; 
+  final Set<String> _datesWithAmal = {};
 
   // !! নতুন: মোট পয়েন্টের জন্য
   int _totalPoints = 0;
   int get totalPoints => _totalPoints;
 
   AmalProvider() {
-    _init(); 
+    _init();
   }
 
   Future<void> _init() async {
     _prefs = await SharedPreferences.getInstance();
-    
+
     // মোট পয়েন্ট লোড করুন
     _totalPoints = _prefs.getInt('totalPoints') ?? 0;
 
     final keys = _prefs.getKeys();
     for (String key in keys) {
-      if (key.startsWith('amal_')) { 
-        final dateKey = key.substring(5); 
+      if (key.startsWith('amal_')) {
+        final dateKey = key.substring(5);
         final amals = _prefs.getStringList(key) ?? [];
         _completedAmals[dateKey] = amals;
         if (amals.isNotEmpty) {
@@ -84,16 +134,16 @@ class AmalProvider with ChangeNotifier {
     final amal = allAmals.firstWhere((a) => a.id == amalId);
 
     if (currentAmals.contains(amalId)) {
-      currentAmals.remove(amalId); 
+      currentAmals.remove(amalId);
       _totalPoints -= amal.points; // পয়েন্ট কমান
     } else {
-      currentAmals.add(amalId); 
+      currentAmals.add(amalId);
       _totalPoints += amal.points; // পয়েন্ট বাড়ান
     }
-    
+
     // মোট পয়েন্ট যেন কখনো ০ এর নিচে না যায়
-    if (_totalPoints < 0) _totalPoints = 0; 
-    
+    if (_totalPoints < 0) _totalPoints = 0;
+
     _completedAmals[dateKey] = currentAmals;
 
     if (currentAmals.isEmpty) {
@@ -105,8 +155,8 @@ class AmalProvider with ChangeNotifier {
     // সেভ করুন
     await _prefs.setStringList('amal_$dateKey', currentAmals);
     await _prefs.setInt('totalPoints', _totalPoints); // মোট পয়েন্ট সেভ করুন
-    
-    notifyListeners(); 
+
+    notifyListeners();
   }
 
   String _formatDateKey(DateTime date) {

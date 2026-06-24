@@ -66,7 +66,8 @@ class InfoCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: isSimple ? MainAxisAlignment.center : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isSimple ? MainAxisAlignment.center : MainAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -87,21 +88,22 @@ class InfoCard extends StatelessWidget {
                 ),
               ),
               if (hasInfoIcon) const SizedBox(width: 8),
-              if (hasInfoIcon) const Icon(Icons.info_outline, color: Colors.black54, size: 18),
+              if (hasInfoIcon)
+                const Icon(Icons.info_outline, color: Colors.black54, size: 18),
             ],
           ),
           if (!isSimple && content != null) ...[
             const SizedBox(height: 8),
             Text(
               content!,
-              style: const TextStyle(color: Colors.black54, fontSize: 12, height: 1.5),
+              style: const TextStyle(
+                  color: Colors.black54, fontSize: 12, height: 1.5),
             ),
           ]
         ],
       ),
     );
   }
-
 
   Widget _buildSehriIftarCard() {
     return Container(
@@ -124,14 +126,18 @@ class InfoCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(title, style: const TextStyle(fontSize: 12, color: Colors.black87), textAlign: TextAlign.center),
+          Text(title,
+              style: const TextStyle(fontSize: 12, color: Colors.black87),
+              textAlign: TextAlign.center),
           const SizedBox(height: 8),
           Text(
             time!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color: isCountdown ? const Color(0xFFD32F2F) : const Color(0xFF1D9375),
+              color: isCountdown
+                  ? const Color(0xFFD32F2F)
+                  : const Color(0xFF1D9375),
             ),
           ),
           const SizedBox(height: 8),

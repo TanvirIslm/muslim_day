@@ -56,8 +56,7 @@ class AppCautionPage extends StatelessWidget {
               _buildWarningCard(
                 icon: Icons.location_on,
                 title: 'অবস্থান নির্ভুলতা',
-                content:
-                    'নামাজের সময় আপনার GPS অবস্থানের উপর নির্ভর করে।\n\n'
+                content: 'নামাজের সময় আপনার GPS অবস্থানের উপর নির্ভর করে।\n\n'
                     '• নিশ্চিত করুন যে GPS/Location Service চালু আছে।\n'
                     '• ইন্টারনেট সংযোগ থাকলে আরও সঠিক ফলাফল পাওয়া যায়।\n'
                     '• সেটিংস থেকে আপনি ম্যানুয়ালি অবস্থান নির্বাচন করতে পারেন।',
@@ -76,8 +75,7 @@ class AppCautionPage extends StatelessWidget {
               _buildWarningCard(
                 icon: Icons.alarm,
                 title: 'অ্যালার্ম ও বিজ্ঞপ্তি',
-                content:
-                    'নামাজের অ্যালার্ম সেট করার জন্য:\n\n'
+                content: 'নামাজের অ্যালার্ম সেট করার জন্য:\n\n'
                     '• প্রথমবার অ্যাপ চালু করলে নোটিফিকেশন অনুমতি দিন।\n'
                     '• ব্যাটারি অপটিমাইজেশন থেকে এই অ্যাপটি বাদ দিন।\n'
                     '• ফোন সাইলেন্ট মোডে থাকলেও অ্যালার্ম বাজবে।',
@@ -86,8 +84,7 @@ class AppCautionPage extends StatelessWidget {
               _buildWarningCard(
                 icon: Icons.info_outline,
                 title: 'সাধারণ পরামর্শ',
-                content:
-                    '• এই অ্যাপ একটি সহায়ক হিসেবে ব্যবহার করুন।\n'
+                content: '• এই অ্যাপ একটি সহায়ক হিসেবে ব্যবহার করুন।\n'
                     '• গুরুত্বপূর্ণ বিষয়ে সর্বদা আলেম/ইমামের পরামর্শ নিন।\n'
                     '• কোন ত্রুটি পেলে সেটিংস চেক করুন।\n'
                     '• নিয়মিত অ্যাপ আপডেট করুন।',
@@ -102,7 +99,8 @@ class AppCautionPage extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.contact_support, color: Colors.teal.shade700, size: 30),
+                    Icon(Icons.contact_support,
+                        color: Colors.teal.shade700, size: 30),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(

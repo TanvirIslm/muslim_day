@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LocationBar extends StatelessWidget {
   final String location;
   final String country;
-  final VoidCallback onLocationPressed; 
+  final VoidCallback onLocationPressed;
   final bool isLoading;
 
   const LocationBar({
@@ -16,13 +16,16 @@ class LocationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Defined primary green here to keep it consistent
+    const Color brandGreen = Color(0xFF1D9375); 
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      color: Colors.white,
+      color: brandGreen, // Changed from Colors.white to brandGreen
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.location_on, color: Color(0xFF1D9375), size: 20),
+          const Icon(Icons.location_on, color: Colors.white, size: 20), // Icon is now white
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -31,14 +34,14 @@ class LocationBar extends StatelessWidget {
                 Text(
                   country,
                   style: const TextStyle(
-                    color: Colors.grey,
+                    color: Colors.white70, // Slightly transparent white for country
                     fontSize: 12,
                   ),
                 ),
-                // 3. Use location from parameter
                 Text(
                   location,
                   style: const TextStyle(
+                    color: Colors.white, // Location text is now solid white
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -48,19 +51,15 @@ class LocationBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          // 4. Add GPS button
           IconButton(
-            icon: isLoading 
-                ? const SizedBox( // Show loading indicator
-                    width: 20, 
-                    height: 20, 
-                    child: CircularProgressIndicator(strokeWidth: 2, color: Colors.teal)
+            icon: isLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                        strokeWidth: 2, color: Colors.white), // Spinner is now white
                   )
-                : const Icon(
-                    Icons.my_location, 
-                    color: Colors.grey, 
-                    size: 24
-                  ),
+                : const Icon(Icons.my_location, color: Colors.white, size: 24), // Button is now white
             onPressed: isLoading ? null : onLocationPressed,
             tooltip: "Detect Current Location",
           ),

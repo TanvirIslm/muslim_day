@@ -31,7 +31,8 @@ class DateTimeBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(hijriDate, style: const TextStyle(color: Colors.white)),
-                Text(gregorianDate, style: const TextStyle(color: Colors.white, height: 1.4)),
+                Text(gregorianDate,
+                    style: const TextStyle(color: Colors.white, height: 1.4)),
               ],
             ),
           ),
@@ -42,8 +43,10 @@ class DateTimeBar extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('সূর্যোদয়: $sunriseTime', style: const TextStyle(color: Colors.white)),
-                  Text('সূর্যাস্ত: $sunsetTime', style: const TextStyle(color: Colors.white)),
+                  Text('সূর্যোদয়: $sunriseTime',
+                      style: const TextStyle(color: Colors.white)),
+                  Text('সূর্যাস্ত: $sunsetTime',
+                      style: const TextStyle(color: Colors.white)),
                 ],
               )
             ],

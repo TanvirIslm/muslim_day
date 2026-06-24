@@ -216,7 +216,9 @@ class PrayerTimesCard extends StatelessWidget {
       int hour = time.hour;
       if (hour > 12) {
         hour -= 12;
-      } else if (hour == 0) hour = 12;
+      } else if (hour == 0) {
+        hour = 12;
+      }
       String minute = time.minute.toString().padLeft(2, '0');
       return '$hour:$minute';
     }

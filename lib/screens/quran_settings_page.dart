@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/quran_settings.dart'; // আপনার সেটিংস
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class QuranSettingsPage extends StatelessWidget {
+  const QuranSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +34,20 @@ class SettingsPage extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      title: Text("রিসেট সেটিংস", style: GoogleFonts.notoSansBengali()),
-                      content: Text("আপনি কি সব সেটিংস ডিফল্ট অবস্থায় ফিরিয়ে আনতে চান?", style: GoogleFonts.notoSansBengali()),
+                      title: Text("রিসেট সেটিংস",
+                          style: GoogleFonts.notoSansBengali()),
+                      content: Text(
+                          "আপনি কি সব সেটিংস ডিফল্ট অবস্থায় ফিরিয়ে আনতে চান?",
+                          style: GoogleFonts.notoSansBengali()),
                       actions: [
                         TextButton(
-                          child: Text("না", style: GoogleFonts.notoSansBengali()),
+                          child:
+                              Text("না", style: GoogleFonts.notoSansBengali()),
                           onPressed: () => Navigator.of(ctx).pop(),
                         ),
                         TextButton(
-                          child: Text("হ্যাঁ", style: GoogleFonts.notoSansBengali()),
+                          child: Text("হ্যাঁ",
+                              style: GoogleFonts.notoSansBengali()),
                           onPressed: () {
                             settings.resetToDefault();
                             Navigator.of(ctx).pop();
@@ -77,7 +82,7 @@ class SettingsPage extends StatelessWidget {
                   settings.updateArabicFontSize(value);
                 },
               ),
-              
+
               // --- বাংলা অনুবাদের সাইজ ---
               _buildSectionHeader(context, 'বাংলা অনুবাদের সাইজ'),
               Slider(
@@ -97,11 +102,14 @@ class SettingsPage extends StatelessWidget {
               Wrap(
                 spacing: 8.0,
                 children: <Widget>[
-                  _buildFontChip(settings, 'IndoPak', const TextStyle(fontFamily: 'IndoPak')),
+                  _buildFontChip(settings, 'IndoPak',
+                      const TextStyle(fontFamily: 'IndoPak')),
                   _buildFontChip(settings, 'Amiri', GoogleFonts.amiri()),
-                  _buildFontChip(settings, 'NotoNaskhArabic', GoogleFonts.notoNaskhArabic()),
+                  _buildFontChip(settings, 'NotoNaskhArabic',
+                      GoogleFonts.notoNaskhArabic()),
                   _buildFontChip(settings, 'Lateef', GoogleFonts.lateef()),
-                  _buildFontChip(settings, 'NotoKufiArabic', GoogleFonts.notoKufiArabic()),
+                  _buildFontChip(
+                      settings, 'NotoKufiArabic', GoogleFonts.notoKufiArabic()),
                 ],
               ),
               const Divider(height: 32),
@@ -144,13 +152,15 @@ class SettingsPage extends StatelessWidget {
   }
 
   // ফন্ট চিফ তৈরির হেল্পার
-  Widget _buildFontChip(QuranSettings settings, String fontName, TextStyle fontStyle) {
+  Widget _buildFontChip(
+      QuranSettings settings, String fontName, TextStyle fontStyle) {
     return ChoiceChip(
       label: Text(fontName, style: fontStyle.copyWith(fontSize: 16)),
       selected: settings.arabicFont == fontName,
       selectedColor: Colors.teal, // উন্নত UI
       checkmarkColor: Colors.white, // উন্নত UI
-      labelStyle: TextStyle(color: settings.arabicFont == fontName ? Colors.white : Colors.black),
+      labelStyle: TextStyle(
+          color: settings.arabicFont == fontName ? Colors.white : Colors.black),
       onSelected: (bool selected) {
         if (selected) {
           settings.updateArabicFont(fontName);

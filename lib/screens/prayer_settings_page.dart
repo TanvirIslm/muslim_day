@@ -62,10 +62,12 @@ class PrayerSettingsPage extends StatelessWidget {
             children: [
               _buildCard(
                 child: ListTile(
-                  leading: const Icon(Icons.location_on, color: primaryThemeColor),
+                  leading:
+                      const Icon(Icons.location_on, color: primaryThemeColor),
                   title: Text(
                     'লোকেশন সেট করুন',
-                    style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.notoSansBengali(
+                        fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     settings.locationName,
@@ -114,7 +116,8 @@ class PrayerSettingsPage extends StatelessWidget {
                     ),
                     const Divider(height: 1),
                     ListTile(
-                      leading: const Icon(Icons.calculate, color: primaryThemeColor),
+                      leading:
+                          const Icon(Icons.calculate, color: primaryThemeColor),
                       title: Text(
                         'গণনা হিসাব বিধি দিয়ে দেখুন',
                         style: GoogleFonts.notoSansBengali(),
@@ -128,7 +131,8 @@ class PrayerSettingsPage extends StatelessWidget {
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
-                        _showCalculationMethodDialog(context, settings, primaryThemeColor);
+                        _showCalculationMethodDialog(
+                            context, settings, primaryThemeColor);
                       },
                     ),
                   ],
@@ -139,18 +143,20 @@ class PrayerSettingsPage extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.access_time, color: primaryThemeColor),
+                      leading: const Icon(Icons.access_time,
+                          color: primaryThemeColor),
                       title: Text(
                         'আসরের হানাফী ভিত্তি দিয়ে দেখুন',
-                        style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold),
+                        style: GoogleFonts.notoSansBengali(
+                            fontWeight: FontWeight.bold),
                       ),
                       // FIXED: Swapped out static 'Enable' text for a dynamic functional status block
                       subtitle: Text(
-                        settings.madhab == Madhab.hanafi 
-                            ? 'হানাফী মাজহাব সময়সূচী সক্রিয়' 
+                        settings.madhab == Madhab.hanafi
+                            ? 'হানাফী মাজহাব সময়সূচী সক্রিয়'
                             : 'শাফেয়ী, মালেকী ও হাম্বলী সময়সূচী সক্রিয়',
                         style: GoogleFonts.notoSansBengali(
-                          fontSize: 12, 
+                          fontSize: 12,
                           color: primaryThemeColor,
                           fontWeight: FontWeight.w500,
                         ),
@@ -201,7 +207,8 @@ class PrayerSettingsPage extends StatelessWidget {
                     ),
                     const Divider(height: 1),
                     ListTile(
-                      leading: const Icon(Icons.info_outline, color: primaryThemeColor),
+                      leading: const Icon(Icons.info_outline,
+                          color: primaryThemeColor),
                       title: Text(
                         _getCalculationMethodName(settings.calculationMethod),
                         style: GoogleFonts.notoSansBengali(),
@@ -239,7 +246,8 @@ class PrayerSettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRadioOption(String label, bool selected, VoidCallback onTap, Color activeColor) {
+  Widget _buildRadioOption(
+      String label, bool selected, VoidCallback onTap, Color activeColor) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -275,7 +283,8 @@ class PrayerSettingsPage extends StatelessWidget {
     );
   }
 
-  void _showCalculationMethodDialog(BuildContext context, PrayerSettings settings, Color activeColor) {
+  void _showCalculationMethodDialog(
+      BuildContext context, PrayerSettings settings, Color activeColor) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

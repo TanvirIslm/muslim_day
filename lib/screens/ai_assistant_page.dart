@@ -19,7 +19,8 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
     // Add welcome message
     _messages.add(
       ChatMessage(
-        text: 'আসসালামু আলাইকুম! আমি আপনার ইসলামিক সহায়ক। আপনি আমাকে নামাজ, রোজা, হজ্জ, যাকাত এবং অন্যান্য ইসলামিক বিষয়ে প্রশ্ন করতে পারেন।',
+        text:
+            'আসসালামু আলাইকুম! আমি আপনার ইসলামিক সহায়ক। আপনি আমাকে নামাজ, রোজা, হজ্জ, যাকাত এবং অন্যান্য ইসলামিক বিষয়ে প্রশ্ন করতে পারেন।',
         isUser: false,
         time: DateTime.now(),
       ),
@@ -68,7 +69,7 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
 
   String _getAutoResponse(String question) {
     final q = question.toLowerCase();
-    
+
     if (q.contains('নামাজ') || q.contains('সালাত')) {
       return 'নামাজ সম্পর্কে আপনার প্রশ্নের জন্য ধন্যবাদ। নামাজ ইসলামের পাঁচটি স্তম্ভের একটি এবং এটি দিনে পাঁচ বার আদায় করা ফরজ। আপনি কি নামাজের সময়, নিয়ম, বা অন্য কিছু জানতে চান?';
     } else if (q.contains('রোজা') || q.contains('সিয়াম')) {
@@ -131,7 +132,8 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
                 _messages.clear();
                 _messages.add(
                   ChatMessage(
-                    text: 'আসসালামু আলাইকুম! আমি আপনার ইসলামিক সহায়ক। আপনি আমাকে নামাজ, রোজা, হজ্জ, যাকাত এবং অন্যান্য ইসলামিক বিষয়ে প্রশ্ন করতে পারেন।',
+                    text:
+                        'আসসালামু আলাইকুম! আমি আপনার ইসলামিক সহায়ক। আপনি আমাকে নামাজ, রোজা, হজ্জ, যাকাত এবং অন্যান্য ইসলামিক বিষয়ে প্রশ্ন করতে পারেন।',
                     isUser: false,
                     time: DateTime.now(),
                   ),
@@ -293,10 +295,8 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
-                  bottomLeft:
-                      Radius.circular(message.isUser ? 16 : 4),
-                  bottomRight:
-                      Radius.circular(message.isUser ? 4 : 16),
+                  bottomLeft: Radius.circular(message.isUser ? 16 : 4),
+                  bottomRight: Radius.circular(message.isUser ? 4 : 16),
                 ),
                 border: Border.all(
                   color: message.isUser

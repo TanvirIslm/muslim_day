@@ -3,6 +3,8 @@ import 'package:adhan/adhan.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'dart:math' show cos, sqrt;
 
 // Prayer time types including nafil and prohibited times
 enum PrayerTimeType {
@@ -41,11 +43,11 @@ class ExtendedPrayerTime {
 class PrayerSettings extends ChangeNotifier {
   late SharedPreferences _prefs;
 
-  Coordinates _coordinates = Coordinates(23.8103, 90.4125); 
+  Coordinates _coordinates = Coordinates(23.8103, 90.4125);
   String _locationName = "ঢাকা, বাংলাদেশ";
   CalculationMethod _calculationMethod = CalculationMethod.karachi;
   Madhab _madhab = Madhab.hanafi;
-  bool _isLoading = true; 
+  bool _isLoading = true;
 
   Coordinates get coordinates => _coordinates;
   String get locationName => _locationName;
@@ -92,7 +94,7 @@ class PrayerSettings extends ChangeNotifier {
   List<ExtendedPrayerTime> getExtendedPrayerTimes(DateTime date) {
     final prayerTimes = PrayerTimes.today(_coordinates, calculationParams);
     final List<ExtendedPrayerTime> times = [];
-    // Order the timeline from Fajr -> ... -> Isha, then add Tahajjud after Isha.
+    
     // Fajr
     times.add(ExtendedPrayerTime(
       name: 'Fajr',
@@ -131,7 +133,9 @@ class PrayerSettings extends ChangeNotifier {
     // Duha (Mid-morning)
     final duhaTime = prayerTimes.sunrise.add(
       Duration(
-        minutes: (prayerTimes.dhuhr.difference(prayerTimes.sunrise).inMinutes * 0.4).round(),
+        minutes:
+            (prayerTimes.dhuhr.difference(prayerTimes.sunrise).inMinutes * 0.4)
+                .round(),
       ),
     );
     times.add(ExtendedPrayerTime(
@@ -192,9 +196,9 @@ class PrayerSettings extends ChangeNotifier {
       type: PrayerTimeType.isha,
     ));
 
-    // Tahajjud (Last third of night begins after Isha)
-    // Compute start of last third of night as: Isha + 2/3 of the night length (Isha->Fajr)
-    final nightDurationMinutes = prayerTimes.fajr.difference(prayerTimes.isha).inMinutes;
+    // Tahajjud
+    final nightDurationMinutes =
+        prayerTimes.fajr.difference(prayerTimes.isha).inMinutes;
     final tahajjudStart = prayerTimes.isha.add(
       Duration(minutes: ((nightDurationMinutes * 2) / 3).round()),
     );
@@ -212,9 +216,12 @@ class PrayerSettings extends ChangeNotifier {
   // Get only the 5 fard prayers
   List<ExtendedPrayerTime> getFivePrayers(DateTime date) {
     final allTimes = getExtendedPrayerTimes(date);
-    return allTimes.where((time) => 
-      !time.isNafil && !time.isProhibited && time.type != PrayerTimeType.sunrise
-    ).toList();
+    return allTimes
+        .where((time) =>
+            !time.isNafil &&
+            !time.isProhibited &&
+            time.type != PrayerTimeType.sunrise)
+        .toList();
   }
 
   PrayerSettings() {
@@ -225,7 +232,6 @@ class PrayerSettings extends ChangeNotifier {
     _isLoading = loading;
     notifyListeners();
   }
-
 
   Future<void> updateCalculationMethod(CalculationMethod method) async {
     _calculationMethod = method;
@@ -239,96 +245,156 @@ class PrayerSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateManualLocation(double latitude, double longitude, String locationName) async {
+  Future<void> updateManualLocation(
+      double latitude, double longitude, String locationName) async {
     _coordinates = Coordinates(latitude, longitude);
     _locationName = locationName;
 
     await _prefs.setDouble('latitude', latitude);
     await _prefs.setDouble('longitude', longitude);
     await _prefs.setString('locationName', locationName);
-    
+
     notifyListeners();
   }
-
-  Future<void> detectCurrentLocation() async {
+Future<bool> detectCurrentLocation() async {
     _setLoading(true);
-    try {
-      bool serviceEnabled;
-      LocationPermission permission;
 
-      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        throw Exception('লোকেশন সার্ভিস বন্ধ।');
+        _setLoading(false);
+        return false;
       }
 
-      permission = await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          throw Exception('লোকেশন পারমিশন দেওয়া হয়নি।');
+          _setLoading(false);
+          return false;
         }
       }
-      
-      if (permission == LocationPermission.deniedForever) {
-        throw Exception('লোকেশন পারমিশন স্থায়ীভাবে বন্ধ করা আছে।');
-      } 
 
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.medium
-      );
+      if (permission == LocationPermission.deniedForever) {
+        _setLoading(false);
+        return false;
+      }
+
+      Position? position;
+
+      try {
+        position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.medium,
+          timeLimit: const Duration(seconds: 10),
+        );
+      } catch (e) {
+        debugPrint("Live GPS failed, using fallback. Error: $e");
+        position = await Geolocator.getLastKnownPosition();
+      }
+
+      if (position == null) {
+        _setLoading(false);
+        return false;
+      }
 
       _coordinates = Coordinates(position.latitude, position.longitude);
 
-      List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
-        position.latitude, 
-        position.longitude,
-        // acceptLanguage: "bn_BD" 
-      );
-      
-      if (placemarks.isNotEmpty) {
-        geo.Placemark place = placemarks[0];
-        _locationName = "${place.locality ?? place.subAdministrativeArea}, ${place.country ?? ''}";
-      } else {
-        _locationName = "বর্তমান লোকেশন";
+      // Attempt 1: Try to get the real city name from the internet
+      bool nameFound = false;
+      try {
+        List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
+          position.latitude,
+          position.longitude,
+        );
+
+        if (placemarks.isNotEmpty) {
+          geo.Placemark place = placemarks[0];
+          
+          // Try to get a meaningful name. Sometimes locality is null, so we check subAdministrativeArea too
+          String city = place.locality ?? place.subAdministrativeArea ?? "";
+          if (city.isNotEmpty) {
+             _locationName = "$city, ${place.country ?? 'বাংলাদেশ'}";
+             nameFound = true;
+          }
+        }
+      } catch (e) {
+        debugPrint("Geocoding failed: $e");
       }
 
-      // নতুন লোকেশন সেভ করুন
+      // Attempt 2: Mathematical Fallback (If internet geocoding fails)
+      if (!nameFound) {
+         _locationName = _getClosestDistrictName(position.latitude, position.longitude);
+      }
+
+      // Save to phone memory
       await _prefs.setDouble('latitude', _coordinates.latitude);
       await _prefs.setDouble('longitude', _coordinates.longitude);
       await _prefs.setString('locationName', _locationName);
 
+      _setLoading(false);
+      notifyListeners();
+
+      return true;
     } catch (e) {
-      debugPrint("Error detecting location: $e");
-      // এখানে একটি এরর মেসেজ দেখানো যেতে পারে
+      debugPrint("Fatal error detecting location: $e");
+      _setLoading(false);
+      return false;
     }
-    _setLoading(false);
   }
 
-  // --- সেভ ও লোড ---
+  // FIXED: The Mathematical Fallback Function
+  // Add this new function right below detectCurrentLocation()
+  String _getClosestDistrictName(double currentLat, double currentLng) {
+    // This is a simplified list of your districts for fallback matching
+    final List<Map<String, dynamic>> fallbackDistricts = [
+      {"name": "ঢাকা", "lat": 23.8103, "lng": 90.4125},
+      {"name": "চট্টগ্রাম", "lat": 22.3569, "lng": 91.7832},
+      {"name": "রাজশাহী", "lat": 24.3745, "lng": 88.6042},
+      {"name": "খুলনা", "lat": 22.8456, "lng": 89.5403},
+      {"name": "বরিশাল", "lat": 22.7010, "lng": 90.3535},
+      {"name": "সিলেট", "lat": 24.8949, "lng": 91.8687},
+      {"name": "রংপুর", "lat": 25.7439, "lng": 89.2752},
+      {"name": "ময়মনসিংহ", "lat": 24.7471, "lng": 90.4203},
+    ];
 
+    double minDistance = double.infinity;
+    String closestName = "অজানা লোকেশন";
+
+    for (var district in fallbackDistricts) {
+      double dLat = (district["lat"] - currentLat) * 0.0174533; // convert to radians
+      double dLng = (district["lng"] - currentLng) * 0.0174533;
+      // Simple Pythagorean distance approximation
+      double a = dLat * dLat + dLng * dLng * cos(currentLat * 0.0174533) * cos(district["lat"] * 0.0174533);
+      double distance = sqrt(a);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestName = "${district["name"]}, বাংলাদেশ";
+      }
+    }
+
+    return closestName;
+  }
+  // --- Save & Load ---
   Future<void> _loadSettings() async {
-    _setLoading(true); // লোডিং শুরু
+    _setLoading(true);
     _prefs = await SharedPreferences.getInstance();
-    
-    // স্থানাঙ্ক লোড করুন
+
     double latitude = _prefs.getDouble('latitude') ?? _coordinates.latitude;
     double longitude = _prefs.getDouble('longitude') ?? _coordinates.longitude;
     _coordinates = Coordinates(latitude, longitude);
     _locationName = _prefs.getString('locationName') ?? _locationName;
 
-    // ক্যালকুলেশন মেথড লোড
-    String methodName = _prefs.getString('calculationMethod') ?? _calculationMethod.name;
+    String methodName =
+        _prefs.getString('calculationMethod') ?? _calculationMethod.name;
     _calculationMethod = CalculationMethod.values.firstWhere(
-      (m) => m.name == methodName,
-      orElse: () => CalculationMethod.karachi
-    );
+        (m) => m.name == methodName,
+        orElse: () => CalculationMethod.karachi);
 
-    // মাযহাব লোড
     String madhabName = _prefs.getString('madhab') ?? _madhab.name;
-    _madhab = Madhab.values.firstWhere(
-      (m) => m.name == madhabName,
-      orElse: () => Madhab.hanafi
-    );
-    _setLoading(false); // লোডিং শেষ
+    _madhab = Madhab.values
+        .firstWhere((m) => m.name == madhabName, orElse: () => Madhab.hanafi);
+        
+    _setLoading(false);
   }
 }

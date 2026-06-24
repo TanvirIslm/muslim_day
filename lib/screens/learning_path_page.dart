@@ -30,10 +30,10 @@ class _LearningPathPageState extends State<LearningPathPage> {
         children: [
           // Path Selector
           _buildPathSelector(),
-          
+
           // Progress Overview
           _buildProgressOverview(),
-          
+
           // Lesson List
           Expanded(
             child: _buildLessonList(),
@@ -151,7 +151,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
   Widget _buildProgressOverview() {
     final progress = progressData[selectedPath] ?? 0.0;
     final completedLessons = (progress * 20).round();
-    
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
@@ -217,7 +217,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
 
   Widget _buildLessonList() {
     final lessons = _getLessonsForPath(selectedPath);
-    
+
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: lessons.length,
@@ -231,7 +231,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
   Widget _buildLessonCard(Map<String, dynamic> lesson, int index) {
     final isCompleted = lesson['completed'] as bool;
     final isLocked = lesson['locked'] as bool;
-    
+
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
@@ -273,7 +273,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
                 ),
               ),
               const SizedBox(width: 16),
-              
+
               // Lesson Info
               Expanded(
                 child: Column(
@@ -320,7 +320,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
                   ],
                 ),
               ),
-              
+
               // Arrow or Lock
               Icon(
                 isLocked ? Icons.lock : Icons.arrow_forward_ios,
@@ -527,7 +527,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            
+
             // Header
             Padding(
               padding: const EdgeInsets.all(20),
@@ -544,7 +544,8 @@ class _LearningPathPageState extends State<LearningPathPage> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.access_time, size: 16, color: Colors.grey),
+                      const Icon(Icons.access_time,
+                          size: 16, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
                         lesson['duration'] as String,
@@ -557,9 +558,9 @@ class _LearningPathPageState extends State<LearningPathPage> {
                 ],
               ),
             ),
-            
+
             const Divider(),
-            
+
             // Content
             Expanded(
               child: SingleChildScrollView(
@@ -573,7 +574,7 @@ class _LearningPathPageState extends State<LearningPathPage> {
                 ),
               ),
             ),
-            
+
             // Action Button
             Padding(
               padding: const EdgeInsets.all(20),
@@ -587,7 +588,8 @@ class _LearningPathPageState extends State<LearningPathPage> {
                       lesson['completed'] = true;
                       // Update progress
                       final currentProgress = progressData[selectedPath] ?? 0.0;
-                      progressData[selectedPath] = (currentProgress + 0.05).clamp(0.0, 1.0);
+                      progressData[selectedPath] =
+                          (currentProgress + 0.05).clamp(0.0, 1.0);
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -606,7 +608,9 @@ class _LearningPathPageState extends State<LearningPathPage> {
                     ),
                   ),
                   child: Text(
-                    lesson['completed'] as bool ? 'পুনরায় পড়ুন' : 'পাঠ শুরু করুন',
+                    lesson['completed'] as bool
+                        ? 'পুনরায় পড়ুন'
+                        : 'পাঠ শুরু করুন',
                     style: GoogleFonts.notoSansBengali(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

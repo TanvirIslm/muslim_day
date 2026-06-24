@@ -7,7 +7,7 @@ class TasbeehCounterScreen extends StatefulWidget {
   const TasbeehCounterScreen({Key? key}) : super(key: key);
 
   @override
-  _TasbeehCounterScreenState createState() => _TasbeehCounterScreenState();
+  State<TasbeehCounterScreen> createState() => _TasbeehCounterScreenState();
 }
 
 class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
@@ -131,7 +131,8 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
 
   @override
   Widget build(BuildContext context) {
-    final double progress = _targetCount > 0 ? _currentCount / _targetCount : 0.0;
+    final double progress =
+        _targetCount > 0 ? _currentCount / _targetCount : 0.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -166,8 +167,8 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
                         Navigator.pop(context);
                       },
                       child: Text('হ্যাঁ',
-                          style: GoogleFonts.notoSansBengali(
-                              color: Colors.red)),
+                          style:
+                              GoogleFonts.notoSansBengali(color: Colors.red)),
                     ),
                   ],
                 ),
@@ -280,7 +281,8 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF1D9375).withValues(alpha: 0.3),
+                              color: const Color(0xFF1D9375)
+                                  .withValues(alpha: 0.3),
                               blurRadius: 20,
                               spreadRadius: 5,
                               offset: const Offset(0, 10),
@@ -369,7 +371,8 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen>
     );
   }
 
-  Widget _buildStatCard(String label, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+      String label, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

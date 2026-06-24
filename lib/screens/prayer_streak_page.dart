@@ -355,9 +355,7 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
           width: 36,
           height: 60,
           decoration: BoxDecoration(
-            color: isComplete
-                ? const Color(0xFF4CAF50)
-                : Colors.grey.shade200,
+            color: isComplete ? const Color(0xFF4CAF50) : Colors.grey.shade200,
             borderRadius: BorderRadius.circular(8),
           ),
           alignment: Alignment.center,
@@ -438,7 +436,8 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
                           child: Icon(
                             Icons.auto_awesome,
                             size: 50,
-                            color: (badge['color'] as Color).withValues(alpha: 0.2),
+                            color: (badge['color'] as Color)
+                                .withValues(alpha: 0.2),
                           ),
                         );
                       },
@@ -557,7 +556,7 @@ class _PrayerStreakPageState extends State<PrayerStreakPage>
   Widget _buildLeaderTile(Map<String, dynamic> leader) {
     final isYou = leader['name'] == 'আপনি';
     final rank = leader['rank'] as int;
-    
+
     Color getRankColor() {
       if (rank == 1) return Colors.amber;
       if (rank == 2) return Colors.grey.shade400;

@@ -32,13 +32,15 @@ const List<SurahBengaliData> bengaliSurahData = [
   SurahBengaliData(name: "আল-হাজ্জ", meaning: "হজ্জ"), // 22
   SurahBengaliData(name: "আল-মু'মিনূন", meaning: "মুমিনগণ"), // 23
   SurahBengaliData(name: "আন-নূর", meaning: "আলো"), // 24
-  SurahBengaliData(name: "আল-ফুরকান", meaning: "সত্য-মিথ্যার পার্থক্যকারী"), // 25
+  SurahBengaliData(
+      name: "আল-ফুরকান", meaning: "সত্য-মিথ্যার পার্থক্যকারী"), // 25
   SurahBengaliData(name: "আশ-শু'আরা", meaning: "কবিগণ"), // 26
   SurahBengaliData(name: "আন-নামল", meaning: "পিপীলিকা"), // 27
   SurahBengaliData(name: "আল-কাসাস", meaning: "কাহিনী"), // 28
   SurahBengaliData(name: "আল-'আনকাবূত", meaning: "মাকড়সা"), // 29
   SurahBengaliData(name: "আর-রূম", meaning: "রোমানগণ"), // 30
-  SurahBengaliData(name: "লুকমান", meaning: "লুকমান (একজন জ্ঞানী ব্যক্তি)"), // 31
+  SurahBengaliData(
+      name: "লুকমান", meaning: "লুকমান (একজন জ্ঞানী ব্যক্তি)"), // 31
   SurahBengaliData(name: "আস-সাজদাহ", meaning: "সিজদা"), // 32
   SurahBengaliData(name: "আল-আহযাব", meaning: "জোট"), // 33
   SurahBengaliData(name: "সাবা'", meaning: "সাবা (একটি রাজ্য)"), // 34
@@ -109,7 +111,8 @@ const List<SurahBengaliData> bengaliSurahData = [
   SurahBengaliData(name: "আয-যিলযাল", meaning: "ভূমিকম্প"), // 99
   SurahBengaliData(name: "আল-'আদিয়াত", meaning: "অভিযানকারী অশ্ব"), // 100
   SurahBengaliData(name: "আল-কারি'আহ", meaning: "মহাপ্রলয়"), // 101
-  SurahBengaliData(name: "আত-তাকাসুর", meaning: "প্রাচুর্যের প্রতিযোগিতা"), // 102
+  SurahBengaliData(
+      name: "আত-তাকাসুর", meaning: "প্রাচুর্যের প্রতিযোগিতা"), // 102
   SurahBengaliData(name: "আল-'আসর", meaning: "সময়"), // 103
   SurahBengaliData(name: "আল-হুমাযাহ", meaning: "পরনিন্দাকারী"), // 104
   SurahBengaliData(name: "আল-ফীল", meaning: "হাতি"), // 105

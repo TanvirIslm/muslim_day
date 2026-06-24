@@ -39,18 +39,20 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
         desiredAccuracy: LocationAccuracy.medium,
       ).timeout(
         const Duration(seconds: 15),
-        onTimeout: () async => await Geolocator.getLastKnownPosition() ?? Position(
-          longitude: 90.4068,
-          latitude: 23.8103,
-          timestamp: DateTime.now(),
-          accuracy: 0,
-          altitude: 0,
-          heading: 0,
-          speed: 0,
-          speedAccuracy: 0,
-          altitudeAccuracy: 0,
-          headingAccuracy: 0,
-        ),
+        onTimeout: () async =>
+            await Geolocator.getLastKnownPosition() ??
+            Position(
+              longitude: 90.4068,
+              latitude: 23.8103,
+              timestamp: DateTime.now(),
+              accuracy: 0,
+              altitude: 0,
+              heading: 0,
+              speed: 0,
+              speedAccuracy: 0,
+              altitudeAccuracy: 0,
+              headingAccuracy: 0,
+            ),
       );
 
       setState(() {
@@ -148,7 +150,8 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.compass_calibration, size: 60, color: Colors.orange.shade400),
+                  Icon(Icons.compass_calibration,
+                      size: 60, color: Colors.orange.shade400),
                   const SizedBox(height: 20),
                   Text(
                     "কম্পাস সেন্সর উপলব্ধ নয়",
@@ -160,7 +163,8 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
             );
           }
 
-          if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              !snapshot.hasData) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -209,7 +213,10 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       boxShadow: [
-                        BoxShadow(color: Colors.grey.withValues(alpha: 0.3), blurRadius: 10, spreadRadius: 2),
+                        BoxShadow(
+                            color: Colors.grey.withValues(alpha: 0.3),
+                            blurRadius: 10,
+                            spreadRadius: 2),
                       ],
                       gradient: RadialGradient(
                         colors: [Colors.white, Colors.grey.shade100],
@@ -222,7 +229,8 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                         Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.teal.shade400, width: 3),
+                            border: Border.all(
+                                color: Colors.teal.shade400, width: 3),
                           ),
                         ),
 
@@ -234,19 +242,35 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                             children: [
                               Positioned(
                                 top: 15,
-                                child: Text("N", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
+                                child: Text("N",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red)),
                               ),
                               Positioned(
                                 bottom: 15,
-                                child: Text("S", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
+                                child: Text("S",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey)),
                               ),
                               Positioned(
                                 right: 15,
-                                child: Text("E", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
+                                child: Text("E",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey)),
                               ),
                               Positioned(
                                 left: 15,
-                                child: Text("W", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey)),
+                                child: Text("W",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey)),
                               ),
                             ],
                           ),
@@ -264,9 +288,13 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                                   shape: BoxShape.circle,
                                   color: Colors.teal.shade100,
                                 ),
-                                child: const Icon(Icons.mosque, size: 50, color: Colors.teal),
+                                child: const Icon(Icons.mosque,
+                                    size: 50, color: Colors.teal),
                               ),
-                              Container(width: 5, height: 90, color: Colors.teal.shade600),
+                              Container(
+                                  width: 5,
+                                  height: 90,
+                                  color: Colors.teal.shade600),
                             ],
                           ),
                         ),
@@ -295,7 +323,8 @@ class _QiblaCompassScreenState extends State<QiblaCompassScreen> {
                     child: Text(
                       "সবুজ মসজিদ আইকন কিবলার দিক নির্দেশ করে। আপনার ফোন ঘোরান যতক্ষণ না এটি সরাসরি উপরে থাকে।",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.notoSansBengali(fontSize: 14, color: Colors.teal.shade800),
+                      style: GoogleFonts.notoSansBengali(
+                          fontSize: 14, color: Colors.teal.shade800),
                     ),
                   )
                 ],

@@ -7,7 +7,7 @@ class QuranSettings extends ChangeNotifier {
 
   static const double _defaultArabicFontSize = 25.0;
   static const double _defaultTranslationFontSize = 16.0;
-  static const String _defaultArabicFont = 'Amiri'; 
+  static const String _defaultArabicFont = 'Amiri';
   static const bool _defaultShowTranslation = true;
 
   double _arabicFontSize = _defaultArabicFontSize;
@@ -19,7 +19,7 @@ class QuranSettings extends ChangeNotifier {
   double get translationFontSize => _translationFontSize;
   String get arabicFont => _arabicFont;
   bool get showTranslation => _showTranslation;
-  
+
   String? get arabicFontFamily {
     if (_arabicFont == 'IndoPak') {
       // Custom IndoPak font from assets (pubspec.yaml registered family: IndoPak)
@@ -37,12 +37,11 @@ class QuranSettings extends ChangeNotifier {
     if (_arabicFont == 'NotoKufiArabic') {
       return GoogleFonts.notoKufiArabic().fontFamily;
     }
-    return GoogleFonts.amiri().fontFamily; 
+    return GoogleFonts.amiri().fontFamily;
   }
 
-
   QuranSettings() {
-    _loadSettings(); 
+    _loadSettings();
   }
 
   void updateArabicFontSize(double newSize) {
@@ -62,7 +61,7 @@ class QuranSettings extends ChangeNotifier {
     _prefs.setString('arabicFont', newFont);
     notifyListeners();
   }
-  
+
   void toggleTranslation(bool value) {
     _showTranslation = value;
     _prefs.setBool('showTranslation', value);
@@ -84,11 +83,14 @@ class QuranSettings extends ChangeNotifier {
 
   Future<void> _loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
-    
-    _arabicFontSize = _prefs.getDouble('arabicFontSize') ?? _defaultArabicFontSize;
-    _translationFontSize = _prefs.getDouble('translationFontSize') ?? _defaultTranslationFontSize;
+
+    _arabicFontSize =
+        _prefs.getDouble('arabicFontSize') ?? _defaultArabicFontSize;
+    _translationFontSize =
+        _prefs.getDouble('translationFontSize') ?? _defaultTranslationFontSize;
     _arabicFont = _prefs.getString('arabicFont') ?? _defaultArabicFont;
-    _showTranslation = _prefs.getBool('showTranslation') ?? _defaultShowTranslation;
+    _showTranslation =
+        _prefs.getBool('showTranslation') ?? _defaultShowTranslation;
 
     notifyListeners();
   }
