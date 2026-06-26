@@ -1,57 +1,86 @@
-# Dart/Flutter
+# ===========================
+# Flutter / Dart
+# ===========================
+
 .dart_tool/
 .packages
 .pub/
-pubspec.lock
 build/
 doc/api/
 
+# Keep pubspec.lock for Flutter apps
+# !pubspec.lock
+
+# ===========================
 # Android
-*.apk
-*.ap_
-*.dex
-*.class
+# ===========================
+
 .gradle/
 local.properties
-proguard/
-*.log
 .navigation/
 captures/
-.externalNativeBuild
-google-services.json
+.externalNativeBuild/
 
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.log
+
+# Uncomment ONLY if you recreate it from GitHub Secrets
+# google-services.json
+
+# ===========================
+# iOS
+# ===========================
+
+DerivedData/
+xcuserdata/
+
+# ===========================
 # IDEs
+# ===========================
+
 .idea/
 *.iml
 *.iws
 .vscode/
 
-# OS/Global
+# ===========================
+# macOS
+# ===========================
+
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
 ._*
 .Trash-*
+
+# ===========================
+# Linux
+# ===========================
+
 .nfs*
 *~
+
+# ===========================
+# Vim
+# ===========================
+
 tags
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
 Session.vim
 .netrwhist
 [._]*.un~
-xcuserdata/
-DerivedData/
-*.moved-aside
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
 
+# ===========================
 # Fastlane
+# ===========================
+
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
-fastlane/readme.md
