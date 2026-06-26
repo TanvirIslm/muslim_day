@@ -27,7 +27,7 @@ class _AIAssistantPageState extends State<AIAssistantPage> {
     // Gemini API সেটআপ এবং ইসলামিক ক্যারেক্টারিস্টিকস (System Instruction)
     final model = GenerativeModel(
       model: 'gemini-pro',
-      apiKey: 'AIzaSyDG3Lufa5URwzFAlQ24ZPLvfgWXISjMpyQ',
+      apiKey: '**************************************',
       systemInstruction: Content.system(
         'আপনি একজন জ্ঞানী, বিনয়ী এবং নির্ভরযোগ্য ইসলামিক এআই সহকারী। '
         'ব্যবহারকারীকে সালামের উত্তর দেবেন। সর্বদা কুরআন এবং সহীহ হাদিসের আলোকে সঠিক তথ্য প্রদান করবেন। '
