@@ -11,6 +11,8 @@ class PrayerTimesCard extends StatelessWidget {
   final String timeLeftToEnd;
   final double prayerProgress;
   final bool isProhibitedTime;
+  // CHANGED: Added sunriseTime as a required parameter to accurately calculate Fajr's end.
+  final DateTime sunriseTime; 
 
   const PrayerTimesCard({
     super.key,
@@ -20,6 +22,7 @@ class PrayerTimesCard extends StatelessWidget {
     required this.timeLeftToEnd,
     required this.prayerProgress,
     required this.isProhibitedTime,
+    required this.sunriseTime, // CHANGED
   });
 
   @override
@@ -49,7 +52,6 @@ class PrayerTimesCard extends StatelessWidget {
             children: [
               _buildProgressIndicator(context),
               const SizedBox(width: 16),
-              // only for 5 times prayer
               _buildPrayerList(context),
             ],
           ),
@@ -57,7 +59,6 @@ class PrayerTimesCard extends StatelessWidget {
           const Divider(),
           InkWell(
             onTap: () {
-              // Navigate to Hijri Calendar Screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -96,7 +97,6 @@ class PrayerTimesCard extends StatelessWidget {
   }
 
   Widget _buildProgressIndicator(BuildContext context) {
-    // if prohibited color change
     final Color progressColor =
         isProhibitedTime ? Colors.red.shade700 : const Color(0xFF1D9375);
     final String title = isProhibitedTime ? 'নিষিদ্ধ সময়' : currentPrayerName;
@@ -190,7 +190,11 @@ class PrayerTimesCard extends StatelessWidget {
               context,
               prayers[i].nameBn,
               prayers[i].time,
-              i < prayers.length - 1 ? prayers[i + 1].time : prayers[0].time,
+              // CHANGED: Fixed the logic strictly according to Islamic time rules. 
+              // Fajr (i==0) now strictly ends at sunriseTime, not Dhuhr.
+              i == 0 
+                  ? sunriseTime 
+                  : (i < prayers.length - 1 ? prayers[i + 1].time : prayers[0].time),
               isActive: currentPrayer?.type == prayers[i].type,
             ),
         ],
@@ -201,7 +205,6 @@ class PrayerTimesCard extends StatelessWidget {
   Widget _prayerRow(
       BuildContext context, String name, DateTime startTime, DateTime endTime,
       {bool isActive = false}) {
-    // Bengali number conversion
     String toBengaliNumber(String number) {
       const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
       const bengali = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
@@ -211,7 +214,6 @@ class PrayerTimesCard extends StatelessWidget {
       return number;
     }
 
-    // Convert to 12-hour format
     String formatTime12Hour(DateTime time) {
       int hour = time.hour;
       if (hour > 12) {

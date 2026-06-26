@@ -70,7 +70,6 @@ class MuslimDayApp extends StatelessWidget {
               surface: Colors.white,
             ),
           ),
-
           // --- DARK THEME ---
           darkTheme: ThemeData(
             brightness: Brightness.dark,

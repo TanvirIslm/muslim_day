@@ -39,6 +39,9 @@ dependencies:
   pdf: ^3.10.8
   path_provider: ^2.1.2
   open_filex: ^4.3.4
+  #AI assistant
+  google_generative_ai: ^0.4.0
+  flutter_alarm_clock: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -49,7 +52,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   image_path: "assets/logo.png"
-  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_background: "#093930"
   adaptive_icon_foreground: "assets/logo.png"
 
 flutter:
