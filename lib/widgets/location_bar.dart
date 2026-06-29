@@ -16,58 +16,100 @@ class LocationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Defined primary green here to keep it consistent
     const Color brandGreen = Color(0xFF1D9375);
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      color: brandGreen, // Changed from Colors.white to brandGreen
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.location_on,
-              color: Colors.white, size: 20), // Icon is now white
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  country,
-                  style: const TextStyle(
-                    color: Colors
-                        .white70, // Slightly transparent white for country
-                    fontSize: 12,
-                  ),
+    return Material(
+      color: brandGreen,
+      child: InkWell(
+        onTap: isLoading ? null : onLocationPressed,
+        splashColor: Colors.white.withValues(alpha: 0.2),
+        highlightColor: Colors.white.withValues(alpha: 0.1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // ১. স্টাইলিশ লোকেশন আইকন (বাম দিকে)
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.15), // হালকা গ্লাস ইফেক্ট
+                  borderRadius: BorderRadius.circular(10), // সুন্দর স্কয়ার-রাউন্ডেড শেপ
                 ),
-                Text(
-                  location,
-                  style: const TextStyle(
-                    color: Colors.white, // Location text is now solid white
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+                child: const Icon(
+                  Icons.location_on_rounded, // রাউন্ডেড আইকন দেখতে বেশি আধুনিক লাগে
+                  color: Colors.white,
+                  size: 20,
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+
+              // ২. লোকেশন এবং দেশের নাম (এক সারিতে)
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        location,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          letterSpacing: 0.3,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if (country.trim().isNotEmpty) ...[
+                      const SizedBox(width: 6),
+                      Text(
+                        country,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.8),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 8),
+
+              // ৩. স্টাইলিশ ডানদিকের আইকন / লোডিং
+              isLoading
+                  ? Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2), // আইকনটিকে একটু বেশি হাইলাইট করা হয়েছে
+                        shape: BoxShape.circle, // পুরোপুরি গোলাকার শেপ
+                      ),
+                      child: const Icon(
+                        Icons.keyboard_arrow_right_rounded, // অ্যারো রাইট (পেজ চেঞ্জ বোঝাতে)
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+            ],
           ),
-          const SizedBox(width: 8),
-          IconButton(
-            icon: isLoading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white), // Spinner is now white
-                  )
-                : const Icon(Icons.my_location,
-                    color: Colors.white, size: 24), // Button is now white
-            onPressed: isLoading ? null : onLocationPressed,
-            tooltip: "Detect Current Location",
-          ),
-        ],
+        ),
       ),
     );
   }

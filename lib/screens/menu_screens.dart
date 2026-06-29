@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'qibla_compass.dart';
 import 'tasbeeh.dart';
-import 'dua_collection_page.dart';
+// import 'dua_collection_page.dart';
 import 'nearby_mosque_page.dart';
 import 'masnoon_amal_page.dart';
 import 'app_settings_page.dart';
@@ -10,6 +10,7 @@ import 'prayer_streak_page.dart';
 import 'learning_path_page.dart';
 import 'ai_assistant_page.dart';
 import 'app_caution_page.dart';
+import 'my_dua_collection.dart'; 
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -116,7 +117,7 @@ class MenuScreen extends StatelessWidget {
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const DuaCollectionPage())),
+                    builder: (context) => const MyCollectionPage())),
           ),
           _buildMenuItem(
             icon: Icons.mosque_outlined,

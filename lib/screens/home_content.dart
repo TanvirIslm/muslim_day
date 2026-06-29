@@ -10,6 +10,7 @@ import '../widgets/location_bar.dart';
 import '../widgets/date_time_bar.dart';
 import '../widgets/prayer_times_card.dart';
 import '../widgets/info_card.dart';
+import '../screens/location_selection_screen.dart';
 import 'app_caution_page.dart';
 
 class HomeContent extends StatefulWidget {
@@ -57,7 +58,7 @@ void _updateAllData(PrayerSettings settings) {
     if (settings.isLoading) return;
 
     try {
-      // FIX: টাইমজোন এবং তারিখের অমিল দূর করতে এই অংশটি চেক করুন
+      // টাইমজোন এবং তারিখের অমিল দূর করতে এই অংশটি চেক করুন
       final now = DateTime.now();
       
       _allPrayerTimes = settings.getExtendedPrayerTimes(now);
@@ -67,7 +68,7 @@ void _updateAllData(PrayerSettings settings) {
       String hijriRaw = HijriCalendar.now().toFormat("d MMMM, yyyy");
       _hijriDate = _toBengaliNumber(hijriRaw); 
       
-      // FIX: তারিখ যেন ১ দিন এক্সটেন্ড না হয় তার জন্য লোকাল ফরম্যাট নিশ্চিত করা
+      // তারিখ যেন ১ দিন এক্সটেন্ড না হয় তার জন্য লোকাল ফরম্যাট নিশ্চিত করা
       _gregorianDate = DateFormat('d MMMM, EEEE', 'bn_BD').format(now);
 
       _updatePrayerProgressAndCountdown();
@@ -102,33 +103,22 @@ void _updateAllData(PrayerSettings settings) {
         _currentPrayer = prayer;
         _nextPrayer = nextPrayer;
         _isProhibitedTime = prayer.isProhibited;
+        // নাম সেট করা
+        _currentPrayerName = _isProhibitedTime ? 'নিষিদ্ধ সময়' : prayer.nameBn;
 
-        if (_isProhibitedTime) {
-          _currentPrayerName = 'নিষিদ্ধ সময়';
-          _prayerProgress = 0.0;
+        // প্রগ্রেস এবং কাউন্টডাউন এখন নিষিদ্ধ সময়েও হিসাব হবে
+        final totalDuration = nextPrayerTime.difference(prayerStartTime);
+        final elapsedDuration = now.difference(prayerStartTime);
+        
+        if (totalDuration.inSeconds > 0) {
+          _prayerProgress = elapsedDuration.inSeconds / totalDuration.inSeconds;
         } else {
-          _currentPrayerName = prayer.nameBn;
-          final totalDuration = nextPrayerTime.difference(prayerStartTime);
-          final elapsedDuration = now.difference(prayerStartTime);
-          if (totalDuration.inSeconds > 0) {
-            _prayerProgress =
-                elapsedDuration.inSeconds / totalDuration.inSeconds;
-          } else {
-            _prayerProgress = 0.0;
-          }
+          _prayerProgress = 0.0;
         }
+        // কাউন্টডাউন টাইম সেট করা
         _timeLeftToEnd = nextPrayerTime.difference(now);
         break;
       }
-    }
-
-    if (_currentPrayer == null && _allPrayerTimes.isNotEmpty) {
-      _currentPrayer = _allPrayerTimes.last;
-      _nextPrayer = _allPrayerTimes.first;
-      _currentPrayerName = 'পরবর্তী';
-      _timeLeftToEnd = _nextPrayer!.time.difference(now);
-      _prayerProgress = 0.0;
-      _isProhibitedTime = false;
     }
   }
 
@@ -194,7 +184,12 @@ void _updateAllData(PrayerSettings settings) {
   }
 
   void _handleLocationPress() {
-    Provider.of<PrayerSettings>(context, listen: false).detectCurrentLocation();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LocationSelectionScreen(),
+      ),
+    );
   }
 
   void _setAlarm(DateTime dateTime, String title) {
@@ -240,7 +235,7 @@ void _updateAllData(PrayerSettings settings) {
         final dhuhrTime =
             _fivePrayers.firstWhere((p) => p.type == PrayerTimeType.dhuhr);
 
-        // কঠোর নিষিদ্ধ সময়: মাগরিবের ঠিক ১৫ মিনিট আগে থেকে
+        // মাগরিবের ঠিক ১৫ মিনিট আগে থেকে
         final strictSunsetProhibitedStart =
             maghribTime.time.subtract(const Duration(minutes: 15));
 
@@ -253,7 +248,7 @@ void _updateAllData(PrayerSettings settings) {
             // আইওএসের (iOS) জন্য
             statusBarBrightness: Brightness.dark,
           ),
-          child: SafeArea( // 👈 এখানে Fix করা হয়েছে
+          child: SafeArea( //  এখানে Fix করা হয়েছে
             child: SingleChildScrollView(
               child: Column(
                 children: [
