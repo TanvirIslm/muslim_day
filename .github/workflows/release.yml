@@ -1,26 +1,30 @@
-name: Build and Release
+name: Build Android APK
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 permissions:
   contents: write
+
+concurrency:
+  group: android-build
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: '17'
+          java-version: "17"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -28,16 +32,50 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
+      - name: Get Dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Verify Formatting (optional)
+        run: dart format --output=none --set-exit-if-changed .
+        continue-on-error: true
+
+      - name: Analyze (optional)
+        run: flutter analyze
+        continue-on-error: true
+
+      - name: Build Release APK
         run: flutter build apk --release
 
-      - name: Create GitHub Release
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Muslim-Day-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Delete old "latest" Release
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        continue-on-error: true
+        with:
+          delete_release: true
+          tag_name: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Latest Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: latest
+          name: Latest Build
+          body: |
+            ## Latest Development Build
+
+            Automatically generated from the latest commit.
+
+            Commit:
+            ${{ github.sha }}
+
           files: build/app/outputs/flutter-apk/app-release.apk
           generate_release_notes: true
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
