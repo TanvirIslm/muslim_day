@@ -13,7 +13,7 @@ class CommunityHubPage extends StatefulWidget {
 class _CommunityHubPageState extends State<CommunityHubPage> {
   // Category Data in Bangla
   final List<Map<String, dynamic>> _categories = [
-    {'title': 'সালাত / নামাজ', 'icon': Icons.self_improvement},
+    {'title': 'সালাত', 'icon': Icons.self_improvement},
     {'title': 'দৈনন্দিন জীবন', 'icon': Icons.edit_calendar_outlined},
     {'title': 'সাওম', 'icon': Icons.dark_mode_outlined},
     {'title': 'সকাল-সন্ধ্যার যিকর', 'icon': Icons.wb_sunny_outlined},
