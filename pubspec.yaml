@@ -42,6 +42,7 @@ dependencies:
   #AI assistant
   google_generative_ai: ^0.4.0
   flutter_alarm_clock: ^0.1.2
+  share_plus: ^13.2.0
 
 dev_dependencies:
   flutter_test:

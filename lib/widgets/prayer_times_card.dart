@@ -254,11 +254,11 @@ class PrayerTimesCard extends StatelessWidget {
 
     // প্রো-লেভেল আইকন প্যাক (প্রতিটি ওয়াক্তের জন্য আলাদা)
     final List<IconData> prayerIcons = [
-      Icons.wb_twilight_rounded,    
-      Icons.wb_sunny_rounded,       
-      Icons.brightness_medium_rounded, 
-      Icons.brightness_3_rounded,   
-      Icons.nights_stay_rounded,  
+      Icons.wb_twilight_rounded,    // ফজর (ভোর)
+      Icons.wb_sunny_rounded,       // যোহর (দুপুর)
+      Icons.brightness_medium_rounded, // আসর (বিকেল)
+      Icons.brightness_3_rounded,   // মাগরিব (সূর্যাস্ত/চাঁদ)
+      Icons.nights_stay_rounded,    // ইশা (রাত)
     ];
 
     return Expanded(

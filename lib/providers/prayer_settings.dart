@@ -55,6 +55,9 @@ class PrayerSettings extends ChangeNotifier {
   Madhab get madhab => _madhab;
   bool get isLoading => _isLoading;
 
+  double get latitude => _coordinates.latitude;
+  double get longitude => _coordinates.longitude;
+
   CalculationParameters get calculationParams {
     final params = _calculationMethod.getParameters();
     params.madhab = _madhab;
@@ -172,10 +175,12 @@ class PrayerSettings extends ChangeNotifier {
     ));
 
     // Prohibited after Asr (until Maghrib)
+    // নিষিদ্ধ সময় শুধুমাত্র সূর্যাস্তের ঠিক আগ মুহূর্তের জন্য (সবসময় নয়)
+    final maghribStart = prayerTimes.maghrib;
     times.add(ExtendedPrayerTime(
-      name: 'Prohibited (After Asr)',
-      nameBn: 'নিষিদ্ধ সময় (আসরের পর)',
-      time: prayerTimes.asr,
+      name: 'Prohibited (Sunset)',
+      nameBn: 'নিষিদ্ধ সময় (সূর্যাস্তের আগে)',
+      time: maghribStart.subtract(const Duration(minutes: 15)),
       type: PrayerTimeType.prohibitedAfterAsr,
       isProhibited: true,
     ));
@@ -344,7 +349,6 @@ class PrayerSettings extends ChangeNotifier {
     }
   }
 
-  // FIXED: The Mathematical Fallback Function
   // Add this new function right below detectCurrentLocation()
   String _getClosestDistrictName(double currentLat, double currentLng) {
     // This is a simplified list of your districts for fallback matching
