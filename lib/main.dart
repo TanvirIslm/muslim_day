@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('bn_BD', null);
 
-  // Forces the status bar to match your brand green
+  // Forces the status bar to match your style
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Color(0xFF1D9375),
     statusBarIconBrightness: Brightness.light,
